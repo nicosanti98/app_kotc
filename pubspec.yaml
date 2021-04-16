@@ -46,7 +46,7 @@ dev_dependencies:
   flutter_launcher_icons: any
 
 flutter_icons:
-    image_path: "res/logoCOLORI.png"
+    image_path: "res/ic_launcher-web.png"
     android: true
     ios: true
 
