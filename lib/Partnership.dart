@@ -67,10 +67,10 @@ class Partnership extends StatefulWidget {
       Random rnd = new Random();
       while(list.isNotEmpty)
         {
-          int num = rnd.nextInt(10);
+          int num = rnd.nextInt(100);
           if (int.parse(list.elementAt(i)['priorita'])==3)
             {
-              if(num > 7)
+              if(num > 98)
                 {
                   editedList.add(list.elementAt(i));
                   list.removeAt(i);
@@ -91,7 +91,7 @@ class Partnership extends StatefulWidget {
             }
           else if(int.parse(list.elementAt(i)['priorita'])==2)
             {
-              if(num > 5)
+              if(num > 93)
                 {
                   editedList.add(list.elementAt(i));
                   list.removeAt(i);
@@ -112,7 +112,7 @@ class Partnership extends StatefulWidget {
             }
           else if(int.parse(list.elementAt(i)['priorita'])==1)
             {
-              if (num > 1)
+              if (num > 0)
                 {
                   editedList.add(list.elementAt(i));
                   list.removeAt(i);
@@ -124,6 +124,13 @@ class Partnership extends StatefulWidget {
                 }
             }
         }
+
+        for(int i = editedList.length; i < 20; i++)
+          {
+            var elem = {"id":"null","immagine":"null", "link":"null","priorita":"null", "descrizione": "null"};
+            editedList.add(elem);
+          }
+        print(editedList);
       return editedList;
     }
 
@@ -150,22 +157,32 @@ class Partnership extends StatefulWidget {
                   child: Icon(Icons.more_horiz, color: Colors.white,),
                 ),
                 body: ListView(
-                  padding: EdgeInsets.all(20),
 
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height / 5,
+                            width: MediaQuery.of(context).size.width/2,
                             child: FlatButton(
-                              child: Image.network(adjusted[0]['immagine'], fit: BoxFit.scaleDown,),
+                              child: Image.network(adjusted[0]['immagine'], fit: BoxFit.fill,),
                               onPressed: ()async {
                                 var url = adjusted[0]['link'].toString();
+                                if (await canLaunch(url))
+                                  await launch(url);
+                                else
+                                  // can't launch url, there is some error
+                                  throw "Could not launch $url";
+                              },
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width/2,
+                            child: FlatButton(
+                              child: Image.network(adjusted[1]['immagine'], fit: BoxFit.fill,),
+                              onPressed: ()async {
+                                var url = adjusted[1]['link'].toString();
                                 if (await canLaunch(url))
                                   await launch(url);
                                 else
@@ -175,63 +192,144 @@ class Partnership extends StatefulWidget {
                             ) ,
                           )
 
+
                         ],
-                      ),
-
-                      ],
-
+                      )
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                        Column(
-                        mainAxisSize: MainAxisSize.min,
+
+                    Container(
+                      child:Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
                               Container(
-                              height: MediaQuery.of(context).size.height / 5,
-                              child: FlatButton(
-                              child: Image.network(adjusted[1]['immagine'], fit: BoxFit.scaleDown,),
-                              onPressed: ()async {
-                              var url = adjusted[1]['link'].toString();
-                              if (await canLaunch(url))
-                              await launch(url);
-                              else
-                              // can't launch url, there is some error
-                              throw "Could not launch $url";
-                              },
-                              ) ,
-                              )],
+                                width: MediaQuery.of(context).size.width/3,
+                                child: FlatButton(
+                                  child: Image.network(adjusted[2]['immagine'], fit: BoxFit.scaleDown,),
+                                  onPressed: ()async {
+                                    var url = adjusted[2]['link'].toString();
+                                    if (await canLaunch(url))
+                                      await launch(url);
+                                    else
+                                      // can't launch url, there is some error
+                                      throw "Could not launch $url";
+                                  },
+                                ) ,
+
+                            ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: (MediaQuery.of(context).size.width)/3,
+                                child: FlatButton(
+                                  child: Image.network(adjusted[3]['immagine'], fit: BoxFit.scaleDown,),
+                                  onPressed: ()async {
+                                    var url = adjusted[3]['link'].toString();
+                                    if (await canLaunch(url))
+                                      await launch(url);
+                                    else
+                                      // can't launch url, there is some error
+                                      throw "Could not launch $url";
+                                  },
+                                ) ,
+                              ),
+
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: (MediaQuery.of(context).size.width)/3,
+                                child: FlatButton(
+                                  child: Image.network(adjusted[4]['immagine'], fit: BoxFit.scaleDown,),
+                                  onPressed: ()async {
+                                    var url = adjusted[4]['link'].toString();
+                                    if (await canLaunch(url))
+                                      await launch(url);
+                                    else
+                                      // can't launch url, there is some error
+                                      throw "Could not launch $url";
+                                  },
+                                ) ,
+                              ),
+
+                            ],
                           )
-                        ],
-
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
+                    ]),
+            ),
+                    Container(
+                      child:Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height / 5,
-                              child: FlatButton(
-                                child: Image.network(adjusted[2]['immagine'], fit: BoxFit.scaleDown,),
-                                onPressed: ()async {
-                                  var url = adjusted[2]['link'].toString();
-                                  if (await canLaunch(url))
-                                    await launch(url);
-                                  else
-                                    // can't launch url, there is some error
-                                    throw "Could not launch $url";
-                                },
-                              ) ,
-                            )
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width/3,
+                                  child: FlatButton(
+                                    child: Image.network(adjusted[5]['immagine'], fit: BoxFit.scaleDown,),
+                                    onPressed: ()async {
+                                      var url = adjusted[5]['link'].toString();
+                                      if (await canLaunch(url))
+                                        await launch(url);
+                                      else
+                                        // can't launch url, there is some error
+                                        throw "Could not launch $url";
+                                    },
+                                  ) ,
+                                ),
 
-                          ],
-                        ),
-                      ],
 
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width/3,
+                                  child: FlatButton(
+                                    child: Image.network(adjusted[6]['immagine'], fit: BoxFit.scaleDown,),
+                                    onPressed: ()async {
+                                      var url = adjusted[6]['link'].toString();
+                                      if (await canLaunch(url))
+                                        await launch(url);
+                                      else
+                                        // can't launch url, there is some error
+                                        throw "Could not launch $url";
+                                    },
+                                  ) ,
+                                )
+
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width/3,
+                                  child: FlatButton(
+                                    child: Image.network(adjusted[7]['immagine'], fit: BoxFit.scaleDown,),
+                                    onPressed: ()async {
+                                      var url = adjusted[7]['link'].toString();
+                                      if (await canLaunch(url))
+                                        await launch(url);
+                                      else
+                                        // can't launch url, there is some error
+                                        throw "Could not launch $url";
+                                    },
+                                  ) ,
+                                ),
+
+
+                              ],
+                            ),
+
+                          ]),
                     ),
 
                   ],
