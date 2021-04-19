@@ -142,6 +142,34 @@ class ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      bottomSheet: Container(
+          padding: EdgeInsets.all(20),
+          alignment: Alignment.bottomCenter,
+          height: MediaQuery.of(context).size.height/2.5,
+          child: Container(
+
+            decoration: BoxDecoration(border: Border.all(color: Colors.orange)),
+            child: GoogleMap(
+
+
+                markers: {
+                  Marker(
+                      markerId: MarkerId("KOTC"),
+                      position: pos,
+                      infoWindow: InfoWindow(
+                          title: "King of the Cage",
+                          snippet: "Piazza del Duca, Senigallia (AN)"
+                      )
+                  )
+                },
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                    target: pos,
+                    zoom: 13
+                )
+            ),
+          )
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -164,6 +192,8 @@ class ContactsState extends State<Contacts> {
             Container(
               height: MediaQuery.of(context).size.height/10,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children:[
 
@@ -205,33 +235,7 @@ class ContactsState extends State<Contacts> {
 
 
             SizedBox(height: 100,),
-            Container(
-              alignment: Alignment.bottomCenter,
-              height: 300,
-              child: Container(
-
-                    decoration: BoxDecoration(border: Border.all(color: Colors.orange)),
-                    child: GoogleMap(
-
-
-                        markers: {
-                          Marker(
-                              markerId: MarkerId("KOTC"),
-                              position: pos,
-                              infoWindow: InfoWindow(
-                                  title: "King of the Cage",
-                                  snippet: "Piazza del Duca, Senigallia (AN)"
-                              )
-                          )
-                        },
-                        onMapCreated: _onMapCreated,
-                        initialCameraPosition: CameraPosition(
-                            target: pos,
-                            zoom: 13
-                        )
-                    ),
-                  )
-            )],
+            ],
         )
       )
     );

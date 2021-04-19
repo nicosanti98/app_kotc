@@ -29,6 +29,9 @@ dependencies:
   connectivity: any
   webview_flutter: any
   url_launcher: any
+  flutter_html: any
+  wordpress_api: any
+
 
 
 

@@ -13,7 +13,7 @@ class OtherPartnershipInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Info Partnership"),
-        backgroundColor: Colors.black45,
+        backgroundColor: Colors.orange,
         leading: FlatButton(
             child: Icon(Icons.arrow_back),
             onPressed: (){
