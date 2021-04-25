@@ -157,7 +157,7 @@ class Partnership extends StatefulWidget {
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   floatingActionButton: FloatingActionButton(
-                    backgroundColor: Colors.black45,
+                    backgroundColor: Colors.orange,
                     tooltip: "Diventa nostro Partner",
                     onPressed: () {
                       Navigator.push(context,
@@ -170,7 +170,7 @@ class Partnership extends StatefulWidget {
 
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                         alignment: Alignment.centerLeft,
                         child: Text("I nostri partner", style: TextStyle(fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
                       ),

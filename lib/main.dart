@@ -3,6 +3,8 @@ import 'package:app_kotc/Partnership.dart';
 import 'package:app_kotc/HomePage.dart';
 import 'package:flutter/material.dart';
 
+import 'Login.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -58,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     HomePage().getHomePage(),
     Contacts().getContacts(),
     Partnership().getPartnership(),
+    Login().getLogin()
 
   ];
 
@@ -88,18 +91,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Views.elementAt(_selectedBottomNavIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(color: Colors.orange),
+        unselectedIconTheme: IconThemeData(color: Colors.black54),
+        fixedColor: Colors.black54,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.sports_basketball),
+            icon: Icon(Icons.sports_basketball,),
             title: Text('Home Page'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_call),
+            icon: Icon(Icons.add_call,),
             title: Text('Contatti')
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up),
+            icon: Icon(Icons.trending_up,),
             title: Text('Partnership'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined,),
+            title: Text("Account"),
           )
         ],
         currentIndex: _selectedBottomNavIndex,

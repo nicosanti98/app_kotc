@@ -21,6 +21,22 @@ class OtherPartnershipInfo extends StatelessWidget {
             },
           ),
       ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text("Vuoi diventare nostro partner?", style: TextStyle(fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
+              ),
+              Divider(
+                  color: Colors.orange,
+                ),
+            ],
+          ),
+        ),
+      )
     );
   }
 
