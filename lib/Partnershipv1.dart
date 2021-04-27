@@ -1,0 +1,391 @@
+import 'dart:convert';
+
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+
+import 'OtherPartnershipInfo.dart';
+
+final List<Map<String, String>> sponsorTOP = [];
+final List<Map<String, String>> sponsorMEDIUM = [];
+final List<Map<String, String>> sponsorDOWN = [];
+
+
+class ProvaPartnership extends StatefulWidget {
+
+  getPartnership()
+  {
+    return this;
+  }
+
+  @override
+  ProvaPartnershipState createState() => ProvaPartnershipState();
+
+}
+
+class ProvaPartnershipState extends State<ProvaPartnership>{
+
+  static const GOLD = 300;
+  static const SILVER = 200;
+
+
+
+  Future<String>getSponsor() async {
+    Uri uri = Uri.parse("https://www.kingofthecage.it/API/KotcApp/getSponsor.php");
+    var response = await http.get(uri);
+    return (response.body);
+  }
+
+  count(int priorita, List<dynamic> json)
+  {
+    int j = 0;
+    for(int i = 0; i < json.length; i++)
+      {
+        if(json.elementAt(i)['priorita'] == priorita)
+          {
+            j++;
+          }
+      }
+    return j;
+  }
+
+ 
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getSponsor(),
+      builder: (context, AsyncSnapshot<String>snapshot){
+        if(snapshot.hasData)
+          {
+            sponsorTOP.removeRange(0,sponsorTOP.length);
+            sponsorMEDIUM.removeRange(0, sponsorMEDIUM.length);
+            sponsorDOWN.removeRange(0, sponsorDOWN.length);
+            var json = jsonDecode(snapshot.data) as List;
+            for(int i = 0; i < json.length; i++)
+              {
+                if(json.elementAt(i)['priorita'] == '1')
+                  {
+                    Map<String, String> item = new Map();
+                    item['immagine'] = json.elementAt(i)['immagine'];
+                    item['link'] = json.elementAt(i)['link'];
+                    item['descrizione'] = json.elementAt(i)['descrizione'];
+                    item['nome'] = json.elementAt(i)['nome'];
+                    sponsorTOP.add(item);
+                  }
+                else if (json.elementAt(i)['priorita'] == '2')
+                  {
+                    Map<String, String> item = new Map();
+                    item['immagine'] = json.elementAt(i)['immagine'];
+                    item['link'] = json.elementAt(i)['link'];
+                    item['descrizione'] = json.elementAt(i)['descrizione'];
+                    item['nome'] = json.elementAt(i)['nome'];
+                    sponsorMEDIUM.add(item);
+
+                  }
+                else if (json.elementAt(i)['priorita'] == '3')
+                  {
+                    Map<String, String> item = new Map();
+                    item['immagine'] = json.elementAt(i)['immagine'];
+                    item['link'] = json.elementAt(i)['link'];
+                    item['nome'] = json.elementAt(i)['nome'];
+                    item['descrizione'] = json.elementAt(i)['descrizione'];
+                    sponsorDOWN.add(item);
+                  }
+              }
+            return RefreshIndicator(
+                onRefresh: (){
+              setState(() {
+
+              });
+              return Future.delayed(Duration.zero) ;
+
+            },
+              child: Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: Colors.orange,
+                  tooltip: "Diventa nostro Partner",
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) => OtherPartnershipInfo()));
+                  },
+                  child: Icon(Icons.more_horiz, color: Colors.white,),
+                ),
+                body: ListView(
+                    children:[
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Sponsor KING",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+
+                        ),
+                      ),
+                      Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              aspectRatio: 1/1,
+                              enlargeCenterPage: false,
+                              viewportFraction: 0.7,
+                              enableInfiniteScroll: false,
+                              autoPlayInterval: Duration(seconds: 7),
+                              autoPlayAnimationDuration: Duration(seconds: 3),
+                              initialPage: 1,
+                              autoPlay: true,
+                            ),
+                            items: returnImgs(sponsorTOP),
+                          )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Sponsor BASE",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+
+                        ),
+                      ),
+                      Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.5,
+                              autoPlayAnimationDuration: Duration(seconds: 2, milliseconds: 500),
+                              enableInfiniteScroll: false,
+
+                              initialPage: 1,
+                              autoPlay: true,
+                            ),
+                            items: returnImgs(sponsorMEDIUM),
+                          )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Sponsor LITE",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+
+                        ),
+                      ),
+                      Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: 100,
+                              enlargeCenterPage: false,
+                              viewportFraction: 0.3,
+                              enableInfiniteScroll: true,
+                              autoPlayAnimationDuration: Duration(milliseconds: 500),
+                              autoPlayInterval: Duration(seconds: 2),
+                              initialPage: 1,
+                              autoPlay: true,
+                            ),
+                            items: returnImgs(sponsorDOWN),
+                          )
+                      ),
+                    ]
+                ),
+              ));
+        }
+        else
+          {
+            return Center(child: CircularProgressIndicator());
+          }
+      },
+    );
+  }
+  
+  
+  
+  
+  
+  
+  returnImgs(List<Map<String, String>> list)
+  {
+    List<Widget> imageSliders;
+    if (list == sponsorTOP)
+      {
+        imageSliders = list.map((item) => Container(
+            child:
+                Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child:InkWell(
+                        onTap: ()async{
+                          var url = item['link'];
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            // can't launch url, there is some error
+                            throw "Could not launch $url";
+                        },
+                        splashColor: Colors.orange,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                child:
+                                Stack(
+                                  children: <Widget>[
+                                    Image.network(item['immagine'], fit: BoxFit.cover, width:500,),
+                                    Positioned(
+                                      bottom: 0.0,
+                                      left: 0.0,
+                                      right: 0.0,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.orange, Colors.orange.withOpacity(0)
+                                            ],
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter,
+                                          ),
+                                        ),
+                                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+
+                                      ),
+                                    ),
+                                    Align(
+                                        alignment: Alignment.topRight,
+                                        child: Container(
+                                          height: 40,
+                                          child:FloatingActionButton(onPressed: (){},
+
+                                            backgroundColor: Colors.orangeAccent,
+                                            child: Icon(Icons.more_horiz, color: Colors.black38,),
+                                          ),
+                                        )
+                                    )
+
+                                  ],
+                                ),
+
+                              ),
+                            ),
+                            SizedBox(height: 5),
+
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(item['nome']==null?"null":item['nome'],
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                                    ,textAlign: TextAlign.left,
+                                  ),
+                            )
+                          ],
+                        )
+
+                    ),
+                ),
+            )).toList();
+      }
+    else if (list == sponsorMEDIUM)
+      {
+        imageSliders = list.map((item) => Container(
+            child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child:InkWell(
+                  onTap: ()async{
+                    var url = item['link'];
+                    if (await canLaunch(url))
+                      await launch(url);
+                    else
+                      // can't launch url, there is some error
+                      throw "Could not launch $url";
+                  },
+                  splashColor: Colors.orange,
+                  child: Container(
+                    margin: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        child: Stack(
+                          children: <Widget>[
+                            Image.network(item['immagine'], fit: BoxFit.cover, width: 500),
+                            Positioned(
+                              bottom: 0.0,
+                              left: 0.0,
+                              right: 0.0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.orangeAccent, Colors.orangeAccent.withOpacity(0)
+                                    ],
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                  ),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                                child: Text(item['nome']==null?"null":item['nome'],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                    ),
+                  ),
+                )
+            ))).toList();
+      }
+    else if(list == sponsorDOWN)
+      {
+        imageSliders = list.map((item) => Container(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              ),
+                child:InkWell(
+                  onTap: ()async{
+                    var url = item['link'];
+                    if (await canLaunch(url))
+                      await launch(url);
+                    else
+                      // can't launch url, there is some error
+                      throw "Could not launch $url";
+                  },
+                  splashColor: Colors.orange,
+                  child: Container(
+                        child: Stack(
+                          children: <Widget>[
+                            Center(
+                              child: Image.network(item['immagine'], fit: BoxFit.cover, width: 300),
+                            )
+                          ],
+
+                    ),
+                  ),
+                )
+            ))).toList();
+      }
+
+    
+    return imageSliders;
+  }
+
+}

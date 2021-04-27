@@ -12,6 +12,7 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'News.dart';
+import 'Shop.dart';
 
 class HomePage extends StatelessWidget
 {
@@ -318,7 +319,7 @@ class HomePage extends StatelessWidget
                                   alignment: Alignment.bottomLeft,
                                   child: Padding(
                                       padding: EdgeInsets.all(10),
-                                      child:Text("//TODO", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                      child:Text("Shop", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                         textAlign: TextAlign.left,)
                                   ),
                                 ),
@@ -329,10 +330,13 @@ class HomePage extends StatelessWidget
                           ],
                         ),
 
-                        onPressed: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(
-                                  builder: (context) => NonDisponibile()));
+                        onPressed: ()async{
+                          const url = "https://www.kingofthecage.it/store";
+                          if (await canLaunch(url))
+                          await launch(url);
+                          else
+                          // can't launch url, there is some error
+                          throw "Could not launch $url";
                         },
                       ),),
 

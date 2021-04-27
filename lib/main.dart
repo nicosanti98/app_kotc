@@ -3,7 +3,7 @@ import 'package:app_kotc/Partnership.dart';
 import 'package:app_kotc/HomePage.dart';
 import 'package:flutter/material.dart';
 
-import 'Login.dart';
+import 'Partnershipv1.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,8 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static  List<Widget> Views = <Widget>[
     HomePage().getHomePage(),
     Contacts().getContacts(),
-    Partnership().getPartnership(),
-    Login().getLogin()
+    ProvaPartnership().getPartnership(),
 
   ];
 
@@ -81,12 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title,
-        title: Text(widget.title),
-          leading: Padding(padding: EdgeInsets.all(15),child: Image(image: AssetImage('res/logoCOLORI.png'))),
-        ),
       body: Center(
         child: Views.elementAt(_selectedBottomNavIndex),
       ),
@@ -107,10 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.trending_up,),
             title: Text('Partnership'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined,),
-            title: Text("Account"),
-          )
+
         ],
         currentIndex: _selectedBottomNavIndex,
         onTap: _setSelectedBottomNavIndex,

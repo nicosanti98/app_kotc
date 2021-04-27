@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:app_kotc/OtherPartnershipInfo.dart';
 import 'package:connectivity/connectivity.dart';
@@ -172,7 +173,7 @@ class Partnership extends StatefulWidget {
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                         alignment: Alignment.centerLeft,
-                        child: Text("I nostri partner", style: TextStyle(fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
+                        child: Text("I nostri partner", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),

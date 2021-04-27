@@ -21,7 +21,7 @@ class NewsDetail extends StatelessWidget{
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("News"),
+        title: Text(this.title),
         backgroundColor: Colors.orange,
         leading: FlatButton(
           child: Icon(Icons.arrow_back),

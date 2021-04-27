@@ -1,10 +1,14 @@
 
+import 'dart:convert';
+
 import 'package:app_kotc/NewsDetail.dart';
+import 'package:app_kotc/NonDisponibile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:wordpress_api/wordpress_api.dart';
+import 'package:http/http.dart' as http;
 
 class News extends StatefulWidget {
 
@@ -20,21 +24,22 @@ class News extends StatefulWidget {
 class NewsState extends State<News>{
 
 
-  Future<List<PostSchema>>getArticles() async {
-    WordPressAPI api = WordPressAPI('https://www.kingofthecage.it/articoli');
-    final List<PostSchema> posts = await api.getPosts();
-    return (posts);
+  Future<String>getArticles() async {
+    Uri uri = Uri.parse("https://www.kingofthecage.it/API/KotcApp/getArticles.php");
+    var response = await http.get(uri);
+    return (response.body);
   }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return FutureBuilder<List<PostSchema>>(
+    return FutureBuilder<String>(
       future: getArticles(),
-      builder: (context, AsyncSnapshot<List<PostSchema>> snapshot){
+      builder: (context, AsyncSnapshot<String> snapshot){
         if (snapshot.hasData)
           {
-
-            var len = snapshot.data.length;
+            var json = jsonDecode(snapshot.data);
+            var jsondata = new List.from(json as List).reversed;
+            var len = jsondata.length;
 
 
             return RefreshIndicator(
@@ -62,13 +67,11 @@ class NewsState extends State<News>{
                       padding: EdgeInsets.all(20),
                       itemBuilder: (BuildContext context, int index) {
                         return new Card(
-                          elevation: 4,
                           child:InkWell(
                             onTap: (){
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => NewsDetail(snapshot.data[index].title['rendered'].toString(),
-                                                                        snapshot.data[index].content['rendered'].toString())));
+                                      builder: (context) => NewsDetail(jsondata.elementAt(index)["post_title"].toString(), jsondata.elementAt(index)["post_content"].toString())));
                             },
                             splashColor: Colors.orange,
                               child:Padding(
@@ -89,12 +92,17 @@ class NewsState extends State<News>{
                                           children: [
                                             Align(
                                               alignment: Alignment.topLeft,
-                                              child: Text(snapshot.data[index].title['rendered'].toString(),
-                                                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange,decoration: TextDecoration.overline,
+                                              child: Text(jsondata.elementAt(index)['post_title'].toString(),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, letterSpacing: 1, color: Colors.orange,decoration: TextDecoration.underline,
                                                     decorationColor: Colors.deepOrange),),
                                             ),
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Divider(color: Colors.black26,),
+                                        ),
 
-                                            Html(data:snapshot.data[index].content['rendered'].toString().substring(0,200)),
+                                            Html(data:(jsondata.elementAt(index)['post_content'].toString().length<200)?jsondata.elementAt(index)['post_content'].toString():
+                                            jsondata.elementAt(index)['post_content'].toString().substring(0,200)),
                                             Align(
                                               alignment: Alignment.bottomRight,
                                               child: Icon(Icons.more_horiz_rounded),
@@ -105,7 +113,7 @@ class NewsState extends State<News>{
                                             ),
                                             Align(
                                                 alignment: Alignment.bottomLeft,
-                                                child:Text("Ultimo aggiornamento: "+snapshot.data[index].date, style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),)
+                                                child:Text("Ultimo aggiornamento: "+jsondata.elementAt(index)['post_date'], style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),)
                                             )
 
                                           ],

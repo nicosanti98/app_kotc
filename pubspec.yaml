@@ -31,6 +31,9 @@ dependencies:
   url_launcher: any
   flutter_html: any
   wordpress_api: any
+  flutter_plugin_pdf_viewer: any
+  share: any
+  carousel_slider: ^3.0.0
 
 
 
