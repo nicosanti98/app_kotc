@@ -1,16 +1,17 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'OtherPartnershipInfo.dart';
+import 'PartnerDetail.dart';
 
-final List<Map<String, String>> sponsorTOP = [];
-final List<Map<String, String>> sponsorMEDIUM = [];
-final List<Map<String, String>> sponsorDOWN = [];
+
 
 
 class ProvaPartnership extends StatefulWidget {
@@ -20,6 +21,9 @@ class ProvaPartnership extends StatefulWidget {
     return this;
   }
 
+
+
+
   @override
   ProvaPartnershipState createState() => ProvaPartnershipState();
 
@@ -27,14 +31,35 @@ class ProvaPartnership extends StatefulWidget {
 
 class ProvaPartnershipState extends State<ProvaPartnership>{
 
+  List<Map<String, String>> sponsorTOP = [];
+  List<Map<String, String>> sponsorMEDIUM = [];
+  List<Map<String, String>> sponsorDOWN = [];
+
+
   static const GOLD = 300;
   static const SILVER = 200;
 
+  List shuffle(List items) {
+    var random = new Random();
 
+    // Go through all elements.
+    for (var i = items.length - 1; i > 0; i--) {
+
+      // Pick a pseudorandom number according to the list length
+      var n = random.nextInt(i + 1);
+
+      var temp = items[i];
+      items[i] = items[n];
+      items[n] = temp;
+    }
+
+    return items;
+  }
 
   Future<String>getSponsor() async {
     Uri uri = Uri.parse("https://www.kingofthecage.it/API/KotcApp/getSponsor.php");
     var response = await http.get(uri);
+    print (response.body);
     return (response.body);
   }
 
@@ -75,6 +100,8 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                     item['link'] = json.elementAt(i)['link'];
                     item['descrizione'] = json.elementAt(i)['descrizione'];
                     item['nome'] = json.elementAt(i)['nome'];
+                    item['lat'] = json.elementAt(i)['lat'];
+                    item['lng']= json.elementAt(i)['lng'];
                     sponsorTOP.add(item);
                   }
                 else if (json.elementAt(i)['priorita'] == '2')
@@ -84,6 +111,8 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                     item['link'] = json.elementAt(i)['link'];
                     item['descrizione'] = json.elementAt(i)['descrizione'];
                     item['nome'] = json.elementAt(i)['nome'];
+                    item['lat'] = json.elementAt(i)['lat'];
+                    item['lng']= json.elementAt(i)['lng'];
                     sponsorMEDIUM.add(item);
 
                   }
@@ -94,9 +123,14 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                     item['link'] = json.elementAt(i)['link'];
                     item['nome'] = json.elementAt(i)['nome'];
                     item['descrizione'] = json.elementAt(i)['descrizione'];
+                    item['lat'] = json.elementAt(i)['lat'];
+                    item['lng']= json.elementAt(i)['lng'];
                     sponsorDOWN.add(item);
                   }
               }
+            sponsorTOP = shuffle(sponsorTOP);
+            sponsorMEDIUM=shuffle(sponsorMEDIUM);
+            sponsorDOWN=shuffle(sponsorDOWN);
             return RefreshIndicator(
                 onRefresh: (){
               setState(() {
@@ -107,14 +141,14 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
             },
               child: Scaffold(
                 floatingActionButton: FloatingActionButton(
-                  backgroundColor: Colors.orange,
+                  backgroundColor: Colors.blue,
                   tooltip: "Diventa nostro Partner",
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(
                             builder: (context) => OtherPartnershipInfo()));
                   },
-                  child: Icon(Icons.more_horiz, color: Colors.white,),
+                  child: Icon(Icons.article_outlined, color: Colors.white,),
                 ),
                 body: ListView(
                     children:[
@@ -135,7 +169,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                               enableInfiniteScroll: false,
                               autoPlayInterval: Duration(seconds: 7),
                               autoPlayAnimationDuration: Duration(seconds: 3),
-                              initialPage: 1,
+                              initialPage: 0,
                               autoPlay: true,
                             ),
                             items: returnImgs(sponsorTOP),
@@ -157,7 +191,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                               autoPlayAnimationDuration: Duration(seconds: 2, milliseconds: 500),
                               enableInfiniteScroll: false,
 
-                              initialPage: 1,
+                              initialPage: 0,
                               autoPlay: true,
                             ),
                             items: returnImgs(sponsorMEDIUM),
@@ -180,7 +214,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                               enableInfiniteScroll: true,
                               autoPlayAnimationDuration: Duration(milliseconds: 500),
                               autoPlayInterval: Duration(seconds: 2),
-                              initialPage: 1,
+                              initialPage: 0,
                               autoPlay: true,
                             ),
                             items: returnImgs(sponsorDOWN),
@@ -211,6 +245,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
         imageSliders = list.map((item) => Container(
             child:
                 Card(
+                    color: Colors.orange,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
@@ -234,30 +269,21 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                 child:
                                 Stack(
                                   children: <Widget>[
-                                    Image.network(item['immagine'], fit: BoxFit.cover, width:500,),
-                                    Positioned(
-                                      bottom: 0.0,
-                                      left: 0.0,
-                                      right: 0.0,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Colors.orange, Colors.orange.withOpacity(0)
-                                            ],
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                          ),
-                                        ),
-                                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-
-                                      ),
+                                    Container(
+                                      color: Colors.white,
+                                      child: Image.network(item['immagine'], fit: BoxFit.cover, width:1000,),
                                     ),
+
                                     Align(
                                         alignment: Alignment.topRight,
                                         child: Container(
-                                          height: 40,
-                                          child:FloatingActionButton(onPressed: (){},
+                                          height: 50,
+                                          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                          child:FloatingActionButton(onPressed: (){
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                builder: (context) => PartnerDetail(item['nome'],item['descrizione'], LatLng(double.parse(item['lat']), double.parse(item['lng'])), item['immagine'])));
+                                            },
 
                                             backgroundColor: Colors.orangeAccent,
                                             child: Icon(Icons.more_horiz, color: Colors.black38,),
@@ -273,11 +299,11 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                             SizedBox(height: 5),
 
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   alignment: Alignment.centerLeft,
                                   child: Text(item['nome']==null?"null":item['nome'],
                                     style: TextStyle(
-                                      color: Colors.black54,
+                                      color: Colors.white,
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -285,9 +311,9 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   alignment: Alignment.centerLeft,
-                                  child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                                  child: Text((item['descrizione']==null?"Descrizione non disponibile":(item['descrizione'].length < 300?item['descrizione']:item['descrizione'].substring(0, 300)))
                                     ,textAlign: TextAlign.left,
                                   ),
                             )
@@ -330,7 +356,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Colors.orangeAccent, Colors.orangeAccent.withOpacity(0)
+                                      Colors.deepOrangeAccent, Colors.orangeAccent
                                     ],
                                     begin: Alignment.bottomCenter,
                                     end: Alignment.topCenter,
@@ -340,7 +366,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                 child: Text(item['nome']==null?"null":item['nome'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20.0,
+                                    fontSize: 14.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

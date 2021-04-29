@@ -64,6 +64,7 @@ class HomePage extends StatelessWidget
             )
         ),
         body: Container(
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
 
           child: Column(
             children: <Widget>[

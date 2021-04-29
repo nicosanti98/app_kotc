@@ -169,75 +169,77 @@ class ContactsState extends State<Contacts> {
             ),
           )
       ),
-      body: ListView(
-        children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    alignment: Alignment.centerLeft,
-                    child: Text("Contattaci", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Divider(
-                      color: Colors.orange,
-                    ),
-                  ),
+      body: Container(
+        child: ListView(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                alignment: Alignment.centerLeft,
+                child: Text("Contattaci", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Divider(
+                  color: Colors.orange,
+                ),
+              ),
 
-                  SizedBox(height: 20,),
-                  Padding(padding: EdgeInsets.all(20),
-                  child:Text("Per rimanere aggiornato sulle novità seguici su Facebook e Instgram, se, invece, hai bisogno di aiuto puoi tranquillamente inviarci una mail.",
-                    style: TextStyle(fontSize: 14, letterSpacing:1 ),)
-                    ,),
+              SizedBox(height: 20,),
+              Padding(padding: EdgeInsets.all(20),
+                child:Text("Per rimanere aggiornato sulle novità seguici su Facebook e Instgram, se, invece, hai bisogno di aiuto puoi tranquillamente inviarci una mail.",
+                  style: TextStyle(fontSize: 14, letterSpacing:1 ),)
+                ,),
 
-                  SizedBox( height: 50),
-                  Container(
-                    height: MediaQuery.of(context).size.height/10,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children:[
+              SizedBox( height: 50),
+              Container(
+                height: MediaQuery.of(context).size.height/10,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children:[
 
-                          FlatButton(
-                            onPressed: ()async{
-                              const url = "https://www.facebook.com/kingofthecagesenigallia";
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                // can't launch url, there is some error
-                                throw "Could not launch $url";
-                            },
-                            child: Image (image: AssetImage('res/fb.png'),),),
-                          FlatButton(
-                            onPressed: ()async{
-                              const url = "instagram://user?username=kingofthecageofficial";
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                // can't launch url, there is some error
-                                throw "Could not launch $url";
-                            },
-                            child: Image (image: AssetImage('res/insta.png'),),),
-                          FlatButton(
-                            onPressed: ()async{
-                              const url = "mailto:info@kingofthecage.it";
-                              if (await canLaunch(url))
-                                await launch(url);
-                              else
-                                // can't launch url, there is some error
-                                throw "Could not launch $url";
-                            },
-                            child: Image (image: AssetImage('res/mail.png'),),),
-                        ]
+                      FlatButton(
+                        onPressed: ()async{
+                          const url = "https://www.facebook.com/kingofthecagesenigallia";
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            // can't launch url, there is some error
+                            throw "Could not launch $url";
+                        },
+                        child: Image (image: AssetImage('res/fb.png'),),),
+                      FlatButton(
+                        onPressed: ()async{
+                          const url = "instagram://user?username=kingofthecageofficial";
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            // can't launch url, there is some error
+                            throw "Could not launch $url";
+                        },
+                        child: Image (image: AssetImage('res/insta.png'),),),
+                      FlatButton(
+                        onPressed: ()async{
+                          const url = "mailto:info@kingofthecage.it";
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            // can't launch url, there is some error
+                            throw "Could not launch $url";
+                        },
+                        child: Image (image: AssetImage('res/mail.png'),),),
+                    ]
 
-                    ),
+                ),
 
-                  ),
+              ),
 
 
-                  SizedBox(height: 100,),
+              SizedBox(height: 100,),
 
-          ]),
+            ]),
+      )
 
     );
 

@@ -54,7 +54,7 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
           actions: [
             FlatButton(
                 onPressed:()=>_onShareData(context),
-                child: Icon(Icons.share))
+                child: Icon(Platform.isAndroid?Icons.share:Icons.ios_share))
           ],
           title: Text("Brochure Sponsor"),
           backgroundColor: Colors.orange,

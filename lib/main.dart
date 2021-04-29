@@ -1,5 +1,4 @@
 import 'package:app_kotc/Contatti.dart';
-import 'package:app_kotc/Partnership.dart';
 import 'package:app_kotc/HomePage.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Center(
+      body: Container(
         child: Views.elementAt(_selectedBottomNavIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
