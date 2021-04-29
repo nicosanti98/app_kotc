@@ -141,6 +141,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
             },
               child: Scaffold(
                 floatingActionButton: FloatingActionButton(
+                  heroTag: "1",
                   backgroundColor: Colors.blue,
                   tooltip: "Diventa nostro Partner",
                   onPressed: () {
@@ -152,11 +153,20 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                 ),
                 body: ListView(
                     children:[
+                      Padding(padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: Text("Partnership", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Divider(
+                          color: Colors.orange,
+                        ),
+                      ),
+
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Text(
-                          "Sponsor KING",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+                          "KING",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
 
                         ),
                       ),
@@ -178,8 +188,8 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Text(
-                          "Sponsor BASE",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+                          "BASE",
+                          style: TextStyle(color: Colors.black45,fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
 
                         ),
                       ),
@@ -200,7 +210,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Text(
-                          "Sponsor LITE",
+                          "LITE",
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
 
                         ),

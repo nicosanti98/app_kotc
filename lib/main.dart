@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:app_kotc/Contatti.dart';
 import 'package:app_kotc/HomePage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Partnershipv1.dart';
@@ -69,6 +72,61 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  BottomBarSpecific()
+  {
+    if(Platform.isAndroid)
+      {
+        return BottomNavigationBar(
+          selectedIconTheme: IconThemeData(color: Colors.orange),
+          unselectedIconTheme: IconThemeData(color: Colors.black54),
+          fixedColor: Colors.black54,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.sports_basketball,),
+              title: Text('Home Page'),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.add_call,),
+                title: Text('Contatti')
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.trending_up,),
+              title: Text('Partnership'),
+            ),
+
+          ],
+          currentIndex: _selectedBottomNavIndex,
+          onTap: _setSelectedBottomNavIndex,
+        );
+      }
+    else
+      {
+        return CupertinoTabBar(
+          activeColor: Colors.orange,
+          inactiveColor: Colors.black54,
+
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.sports_basketball,),
+              title: Text('Home Page'),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.add_call,),
+                title: Text('Contatti')
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.trending_up,),
+              title: Text('Partnership'),
+            ),
+
+          ],
+          currentIndex: _selectedBottomNavIndex,
+          onTap: _setSelectedBottomNavIndex,
+        );
+      }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,5 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _setSelectedBottomNavIndex,
       ),
     );
+
+
+
   }
 }
