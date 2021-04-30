@@ -77,9 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
     if(Platform.isAndroid)
       {
         return BottomNavigationBar(
-          selectedIconTheme: IconThemeData(color: Colors.orange),
+
+          selectedIconTheme: IconThemeData(color: Color.fromARGB(255, 244, 156, 49)),
           unselectedIconTheme: IconThemeData(color: Colors.black54),
-          fixedColor: Colors.black54,
+          selectedFontSize: 12,
+          unselectedFontSize: 12,
+
+          fixedColor: Color.fromARGB(255, 244, 156, 49),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.sports_basketball,),
@@ -102,20 +106,21 @@ class _MyHomePageState extends State<MyHomePage> {
     else
       {
         return CupertinoTabBar(
-          activeColor: Colors.orange,
+
+          activeColor: Color.fromARGB(255, 244, 156, 49),
           inactiveColor: Colors.black54,
 
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.sports_basketball,),
+              icon: Icon(Icons.sports_basketball_outlined,),
               title: Text('Home Page'),
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add_call,),
+                icon: Icon(Icons.add_ic_call_outlined,),
                 title: Text('Contatti')
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.trending_up,),
+              icon: Icon(Icons.trending_up_outlined,),
               title: Text('Partnership'),
             ),
 
@@ -140,28 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: Views.elementAt(_selectedBottomNavIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedIconTheme: IconThemeData(color: Colors.orange),
-        unselectedIconTheme: IconThemeData(color: Colors.black54),
-        fixedColor: Colors.black54,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sports_basketball,),
-            title: Text('Home Page'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_call,),
-            title: Text('Contatti')
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up,),
-            title: Text('Partnership'),
-          ),
-
-        ],
-        currentIndex: _selectedBottomNavIndex,
-        onTap: _setSelectedBottomNavIndex,
-      ),
+      bottomNavigationBar: BottomBarSpecific(),
     );
 
 

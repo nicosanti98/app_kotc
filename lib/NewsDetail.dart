@@ -22,7 +22,7 @@ class NewsDetail extends StatelessWidget{
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(this.title),
-        backgroundColor: Colors.orange,
+        backgroundColor: Color.fromARGB(255, 244, 156, 49),
         leading: FlatButton(
           child: Icon(Icons.arrow_back),
           onPressed: (){

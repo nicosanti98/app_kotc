@@ -57,7 +57,7 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
                 child: Icon(Platform.isAndroid?Icons.share:Icons.ios_share))
           ],
           title: Text("Brochure Sponsor"),
-          backgroundColor: Colors.orange,
+          backgroundColor: Color.fromARGB(255, 244, 156, 49),
           leading: FlatButton(
             child: Icon(Icons.arrow_back),
             onPressed: (){
@@ -75,7 +75,8 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
                   child: Text("Vuoi diventare nostro partner?", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,letterSpacing: 1), textAlign: TextAlign.left,),
                 ),
                 Divider(
-                  color: Colors.orange,
+                  color: Color.fromARGB(255, 244, 156, 49),
+
                 ),
             _isLoading
                 ? Center(child: CircularProgressIndicator())

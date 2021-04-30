@@ -54,7 +54,7 @@ class NewsState extends State<News>{
                   backgroundColor: Colors.white,
                   appBar: AppBar(
                     title: Text("News"),
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color.fromARGB(255, 244, 156, 49),
                     leading: FlatButton(
                       child: Icon(Icons.arrow_back),
                       onPressed: (){
@@ -73,7 +73,7 @@ class NewsState extends State<News>{
                                   MaterialPageRoute(
                                       builder: (context) => NewsDetail(jsondata.elementAt(index)["post_title"].toString(), jsondata.elementAt(index)["post_content"].toString())));
                             },
-                            splashColor: Colors.orange,
+                            splashColor: Color.fromARGB(255, 244, 156, 49),
                               child:Padding(
                                 padding: EdgeInsets.all(10),
                                 child: ConstrainedBox(
@@ -93,7 +93,7 @@ class NewsState extends State<News>{
                                             Align(
                                               alignment: Alignment.topLeft,
                                               child: Text(jsondata.elementAt(index)['post_title'].toString(),
-                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, letterSpacing: 1, color: Colors.orange,decoration: TextDecoration.underline,
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, letterSpacing: 1, color: Color.fromARGB(255, 244, 156, 49),decoration: TextDecoration.underline,
                                                     decorationColor: Colors.deepOrange),),
                                             ),
                                         Align(
@@ -123,7 +123,7 @@ class NewsState extends State<News>{
                                 ),
                               )
                           ),
-                          shadowColor: Colors.orange,
+                          shadowColor: Color.fromARGB(255, 244, 156, 49),
 
                         );
                       }

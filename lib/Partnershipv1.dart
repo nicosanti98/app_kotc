@@ -158,7 +158,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Divider(
-                          color: Colors.orange,
+                          color: Color.fromARGB(255, 244, 156, 49)
                         ),
                       ),
 
@@ -255,7 +255,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
         imageSliders = list.map((item) => Container(
             child:
                 Card(
-                    color: Colors.orange,
+                    color: Color.fromARGB(255, 244, 156, 49),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
@@ -268,7 +268,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                             // can't launch url, there is some error
                             throw "Could not launch $url";
                         },
-                        splashColor: Colors.orange,
+                        splashColor: Color.fromARGB(255, 244, 156, 49),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -350,7 +350,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                       // can't launch url, there is some error
                       throw "Could not launch $url";
                   },
-                  splashColor: Colors.orange,
+                  splashColor: Color.fromARGB(255, 244, 156, 49),
                   child: Container(
                     margin: EdgeInsets.all(5.0),
                     child: ClipRRect(
@@ -405,7 +405,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                       // can't launch url, there is some error
                       throw "Could not launch $url";
                   },
-                  splashColor: Colors.orange,
+                  splashColor: Color.fromARGB(255, 244, 156, 49),
                   child: Container(
                         child: Stack(
                           children: <Widget>[

@@ -13,7 +13,7 @@ class Shop extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text("News"),
-        backgroundColor: Colors.orange,
+        backgroundColor: Color.fromARGB(255, 244, 156, 49),
         leading: FlatButton(
           child: Icon(Icons.arrow_back),
           onPressed: (){

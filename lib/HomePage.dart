@@ -16,7 +16,7 @@ import 'Shop.dart';
 
 class HomePage extends StatelessWidget
 {
-  var endTime = DateTime.utc(2021, 7, 8,15,0).millisecondsSinceEpoch;
+  var endTime = DateTime.utc(2021, 7, 11,16 ,00).millisecondsSinceEpoch;
 
   getHomePage()
   {
@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget
                                   Column(
                                     children: <Widget>[
                                       Text(time.days==null?"0":time.days.toString(),
-                                        style: TextStyle(fontFamily: "squaremaze", fontSize: 40, color: Colors.white),),
+                                        style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold, color: Colors.white),),
                                       Text("Days", style: TextStyle(fontFamily: "roboto", fontStyle: FontStyle.italic, color: Colors.black),),
                                     ],
                                   ),
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget
                                   Column(
                                     children: <Widget>[
                                       Text(time.hours==null?"0":time.hours.toString() ,
-                                        style: TextStyle(fontFamily: "squaremaze", fontSize: 40, color: Colors.white,),),
+                                        style: TextStyle( fontSize: 40, fontWeight: FontWeight.bold,color: Colors.white,),),
                                       Text("Hours", style: TextStyle(fontFamily: "roboto", fontStyle: FontStyle.italic, color: Colors.black),),
                                     ],
                                   ),
@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget
                                   Column(
                                     children: <Widget>[
                                       Text(time.min==null?"0":time.min.toString() ,
-                                        style: TextStyle(fontFamily: "squaremaze", fontSize: 40, color: Colors.white),),
+                                        style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),),
                                       Text("Minutes", style: TextStyle(fontFamily: "roboto", fontStyle: FontStyle.italic, color: Colors.black),)
                                     ],
                                   ),
@@ -126,7 +126,7 @@ class HomePage extends StatelessWidget
                                   Column(
                                     children: <Widget>[
                                       Text(time.sec==null?"0":time.sec.toString(),
-                                        style: TextStyle(fontFamily: "squaremaze", fontSize: 40, color: Colors.white), ),
+                                        style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white), ),
                                       Text("Seconds", style: TextStyle(fontFamily: "roboto", fontStyle: FontStyle.italic, color: Colors.black),)
                                     ],
                                   ),
@@ -176,32 +176,40 @@ class HomePage extends StatelessWidget
                 Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height/10,
+                      height: (MediaQuery.of(context).size.width-50)/2,
                       width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.orangeAccent,
-                        gradient: LinearGradient(begin:AlignmentDirectional.topStart, end: AlignmentDirectional.bottomEnd,colors: [Colors.orange, Colors.orange.shade200]),
+                        color: Colors.white,
                       ),
                       child:
                       TextButton(
-                        child:Row(
-                          children: [
-                            Column(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
                               children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child:Text("News", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                        textAlign: TextAlign.left,)
-                                  ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/news.png'), width: (MediaQuery.of(context).size.width-50)/5),
                                 ),
 
-                              ],
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text("News", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward),
+                                    )
 
-                            ),
-                          ],
+                                  ],
+                                )
+                              ],
+                            )
                         ),
 
                         onPressed: (){
@@ -217,32 +225,40 @@ class HomePage extends StatelessWidget
                 Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height/10,
+                      height: (MediaQuery.of(context).size.width-50)/2,
                       width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.orangeAccent,
-                        gradient: LinearGradient(begin:AlignmentDirectional.bottomEnd, end: AlignmentDirectional.topStart,colors: [Colors.orange, Colors.orange.shade200]),
+                        color: Colors.white,
                       ),
                       child:
                       TextButton(
-                        child:Row(
-                          children: [
-                            Column(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
                               children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child:Text("Calendario", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                        textAlign: TextAlign.left,)
-                                  ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/calendario.png'), width: (MediaQuery.of(context).size.width-50)/5),
                                 ),
 
-                              ],
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text("Calendario", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.red),
+                                    )
 
-                            ),
-                          ],
+                                  ],
+                                )
+                              ],
+                            )
                         ),
 
                         onPressed: (){
@@ -262,32 +278,41 @@ class HomePage extends StatelessWidget
                 Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height/10,
+                      height: (MediaQuery.of(context).size.width-50)/2,
                       width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.orangeAccent,
-                        gradient: LinearGradient(begin:AlignmentDirectional.topStart, end: AlignmentDirectional.bottomEnd,colors: [Colors.orange, Colors.orange.shade200]),
+                        color: Colors.white,
                       ),
                       child:
                       TextButton(
-                        child:Row(
-                          children: [
-                            Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child:Text("Classifiche", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                        textAlign: TextAlign.left,)
-                                  ),
-                                ),
+                        child:
+                            Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Image(image: AssetImage('res/podio.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                    ),
 
-                              ],
+                                    SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                    Row(
+                                      children: [
+                                        Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text("Classifiche", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        ),
+                                        Container(
+                                          child: Icon(Icons.arrow_forward, color: Colors.green,),
+                                        )
 
-                            ),
-                          ],
+                                      ],
+                                    )
+                                  ],
+                                )
                         ),
 
                         onPressed: (){
@@ -303,32 +328,40 @@ class HomePage extends StatelessWidget
                 Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height/10,
+                      height: (MediaQuery.of(context).size.width-50)/2,
                       width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.orangeAccent,
-                        gradient: LinearGradient(begin:AlignmentDirectional.bottomEnd, end: AlignmentDirectional.topStart,colors: [Colors.orange, Colors.orange.shade200]),
+                        color: Colors.white,
                       ),
                       child:
                       TextButton(
-                        child:Row(
-                          children: [
-                            Column(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
                               children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child:Text("Shop", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                        textAlign: TextAlign.left,)
-                                  ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/shop.png'), width: (MediaQuery.of(context).size.width-50)/5),
                                 ),
 
-                              ],
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text("Shop", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.blue),
+                                    )
 
-                            ),
-                          ],
+                                  ],
+                                )
+                              ],
+                            )
                         ),
 
                         onPressed: ()async{
@@ -363,10 +396,10 @@ class OpenPainter extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size) {
     var paint1 = Paint()
-      ..color = Colors.orange
+      ..color = Color.fromARGB(255, 244, 156, 49)
       ..style = PaintingStyle.fill;
     //a rectangle
-    canvas.drawCircle(Offset(140, -200), 400, paint1);
+    canvas.drawRect(Offset(-80,-100) & Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/2), paint1);
   }
 
   @override
