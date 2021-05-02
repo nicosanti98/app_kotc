@@ -11,20 +11,20 @@ class NonDisponibile extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Non disponibile"),
-        backgroundColor: Color.fromARGB(255, 244, 156, 49),
-        leading: FlatButton(
-          child: Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+
       body: Container(
         alignment: Alignment.center,
         child: Column(
           children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 40, 0, 0),
+              alignment: Alignment.topLeft,
+              child:FlatButton(
+                  minWidth: 10,
+                  onPressed:(){Navigator.of(context).pop();},
+                  child: Icon(Icons.arrow_back)),
+
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height/5,
             ),

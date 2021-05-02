@@ -59,7 +59,6 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
   Future<String>getSponsor() async {
     Uri uri = Uri.parse("https://www.kingofthecage.it/API/KotcApp/getSponsor.php");
     var response = await http.get(uri);
-    print (response.body);
     return (response.body);
   }
 
@@ -153,8 +152,23 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                 ),
                 body: ListView(
                     children:[
-                      Padding(padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Text("Partnership", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child:FlatButton(
+                                minWidth: 10,
+                                  onPressed:(){Navigator.of(context).pop();},
+                                  child: Icon(Icons.arrow_back)),
+
+                            ),
+                            Text("Partnership", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                          ],
+                        ),
+                      ),
+
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Divider(
@@ -253,6 +267,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
     if (list == sponsorTOP)
       {
         imageSliders = list.map((item) => Container(
+
             child:
                 Card(
                     color: Color.fromARGB(255, 244, 156, 49),
@@ -273,6 +288,9 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                              ),
                               margin: EdgeInsets.all(5.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -289,7 +307,9 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                         child: Container(
                                           height: 50,
                                           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                          child:FloatingActionButton(onPressed: (){
+                                          child:FloatingActionButton(
+
+                                            onPressed: (){
                                             Navigator.push(context,
                                                 MaterialPageRoute(
                                                 builder: (context) => PartnerDetail(item['nome'],item['descrizione'], LatLng(double.parse(item['lat']), double.parse(item['lng'])), item['immagine'])));
@@ -306,7 +326,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
 
                               ),
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 10),
 
                                 Container(
                                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -320,6 +340,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
+                                SizedBox(height: 10,),
                                 Container(
                                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   alignment: Alignment.centerLeft,
@@ -364,13 +385,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                               right: 0.0,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.deepOrangeAccent, Colors.orangeAccent
-                                    ],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                  ),
+                                  color: Color.fromARGB(255, 244, 156, 49),
                                 ),
                                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                                 child: Text(item['nome']==null?"null":item['nome'],

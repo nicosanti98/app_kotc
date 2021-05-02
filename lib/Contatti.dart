@@ -147,7 +147,7 @@ class ContactsState extends State<Contacts> {
           height: MediaQuery.of(context).size.height/2.5,
           child: Container(
 
-            decoration: BoxDecoration(border: Border.all(color: Colors.orange)),
+            decoration: BoxDecoration(border: Border.all(color:  Color.fromARGB(255, 244, 156, 49),)),
             child: GoogleMap(
 
 
@@ -172,15 +172,27 @@ class ContactsState extends State<Contacts> {
       body: Container(
         child: ListView(
             children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                alignment: Alignment.centerLeft,
-                child: Text("Contattaci", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child:FlatButton(
+                        minWidth: 10,
+                          onPressed:(){Navigator.of(context).pop();},
+                          child: Icon(Icons.arrow_back)),
+
+                    ),
+                    Text("Contattaci", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                  ],
+                ),
               ),
+
               Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Divider(
-                  color: Colors.orange,
+                  color:  Color.fromARGB(255, 244, 156, 49),
                 ),
               ),
 

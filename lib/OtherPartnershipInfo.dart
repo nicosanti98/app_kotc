@@ -50,34 +50,42 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            FlatButton(
-                onPressed:()=>_onShareData(context),
-                child: Icon(Platform.isAndroid?Icons.share:Icons.ios_share))
-          ],
-          title: Text("Brochure Sponsor"),
-          backgroundColor: Color.fromARGB(255, 244, 156, 49),
-          leading: FlatButton(
-            child: Icon(Icons.arrow_back),
-            onPressed: (){
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
+
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(20),
             child: Column(
               children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Vuoi diventare nostro partner?", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,letterSpacing: 1), textAlign: TextAlign.left,),
-                ),
-                Divider(
-                  color: Color.fromARGB(255, 244, 156, 49),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child:FlatButton(
+                            minWidth: 10,
+                            onPressed:(){Navigator.of(context).pop();},
+                            child: Icon(Icons.arrow_back)),
 
+                      ),
+                      Text("Brochure Sponsor", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                      Container(
+                        alignment: Alignment.topRight,
+                        child:
+                        FlatButton(
+                            onPressed:()=>_onShareData(context),
+                            child: Icon(Platform.isAndroid?Icons.share:Icons.ios_share)),
+                      )
+                    ],
+                  ),
                 ),
+
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: Divider(
+                      color: Color.fromARGB(255, 244, 156, 49)
+                  ),
+                ),
+
             _isLoading
                 ? Center(child: CircularProgressIndicator())
                 : Container(

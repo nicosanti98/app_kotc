@@ -55,82 +55,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  int _selectedBottomNavIndex = 0;
 
-  static  List<Widget> Views = <Widget>[
-    HomePage().getHomePage(),
-    Contacts().getContacts(),
-    ProvaPartnership().getPartnership(),
 
-  ];
 
-  void _setSelectedBottomNavIndex(int index){
-    _selectedBottomNavIndex = index;
-
-    setState(() {
-    });
-  }
-
-  BottomBarSpecific()
-  {
-    if(Platform.isAndroid)
-      {
-        return BottomNavigationBar(
-
-          selectedIconTheme: IconThemeData(color: Color.fromARGB(255, 244, 156, 49)),
-          unselectedIconTheme: IconThemeData(color: Colors.black54),
-          selectedFontSize: 12,
-          unselectedFontSize: 12,
-
-          fixedColor: Color.fromARGB(255, 244, 156, 49),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.sports_basketball,),
-              title: Text('Home Page'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add_call,),
-                title: Text('Contatti')
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.trending_up,),
-              title: Text('Partnership'),
-            ),
-
-          ],
-          currentIndex: _selectedBottomNavIndex,
-          onTap: _setSelectedBottomNavIndex,
-        );
-      }
-    else
-      {
-        return CupertinoTabBar(
-
-          activeColor: Color.fromARGB(255, 244, 156, 49),
-          inactiveColor: Colors.black54,
-
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.sports_basketball_outlined,),
-              title: Text('Home Page'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add_ic_call_outlined,),
-                title: Text('Contatti')
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.trending_up_outlined,),
-              title: Text('Partnership'),
-            ),
-
-          ],
-          currentIndex: _selectedBottomNavIndex,
-          onTap: _setSelectedBottomNavIndex,
-        );
-      }
-
-  }
 
 
   @override
@@ -143,9 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       body: Container(
-        child: Views.elementAt(_selectedBottomNavIndex),
+        child: HomePage()
       ),
-      bottomNavigationBar: BottomBarSpecific(),
     );
 
 
