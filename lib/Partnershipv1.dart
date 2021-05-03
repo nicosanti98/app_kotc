@@ -138,7 +138,9 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
               return Future.delayed(Duration.zero) ;
 
             },
-              child: Scaffold(
+              backgroundColor: Colors.white,
+                child: Scaffold(
+                  backgroundColor: Colors.white,
                 floatingActionButton: FloatingActionButton(
                   heroTag: "1",
                   backgroundColor: Colors.blue,
@@ -188,6 +190,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                           child: CarouselSlider(
                             options: CarouselOptions(
                               aspectRatio: 1/1,
+                              height: sponsorTOP.length==0?10:null,
                               enlargeCenterPage: false,
                               viewportFraction: 0.7,
                               enableInfiniteScroll: false,
@@ -203,7 +206,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                         padding: EdgeInsets.all(20),
                         child: Text(
                           "BASE",
-                          style: TextStyle(color: Colors.black45,fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
 
                         ),
                       ),
@@ -214,7 +217,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                               viewportFraction: 0.5,
                               autoPlayAnimationDuration: Duration(seconds: 2, milliseconds: 500),
                               enableInfiniteScroll: false,
-
+                              height: sponsorMEDIUM.length==0?10:null,
                               initialPage: 0,
                               autoPlay: true,
                             ),
@@ -225,14 +228,14 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                         padding: EdgeInsets.all(20),
                         child: Text(
                           "LITE",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
 
                         ),
                       ),
                       Container(
                           child: CarouselSlider(
                             options: CarouselOptions(
-                              height: 100,
+                              height: sponsorDOWN.length==0?10:100,
                               enlargeCenterPage: false,
                               viewportFraction: 0.3,
                               enableInfiniteScroll: true,
@@ -250,7 +253,12 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
         }
         else
           {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ), );
           }
       },
     );
@@ -264,176 +272,211 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
   returnImgs(List<Map<String, String>> list)
   {
     List<Widget> imageSliders;
-    if (list == sponsorTOP)
+    if(list.length == 0)
       {
-        imageSliders = list.map((item) => Container(
+       imageSliders = [SizedBox(height: 10,)];
 
-            child:
-                Card(
-                    color: Color.fromARGB(255, 244, 156, 49),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child:InkWell(
-                        onTap: ()async{
-                          var url = item['link'];
-                          if (await canLaunch(url))
-                            await launch(url);
-                          else
-                            // can't launch url, there is some error
-                            throw "Could not launch $url";
-                        },
-                        splashColor: Color.fromARGB(255, 244, 156, 49),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                              ),
-                              margin: EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                child:
-                                Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      color: Colors.white,
-                                      child: Image.network(item['immagine'], fit: BoxFit.cover, width:1000,),
-                                    ),
-
-                                    Align(
-                                        alignment: Alignment.topRight,
-                                        child: Container(
-                                          height: 50,
-                                          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                          child:FloatingActionButton(
-
-                                            onPressed: (){
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                builder: (context) => PartnerDetail(item['nome'],item['descrizione'], LatLng(double.parse(item['lat']), double.parse(item['lng'])), item['immagine'])));
-                                            },
-
-                                            backgroundColor: Colors.orangeAccent,
-                                            child: Icon(Icons.more_horiz, color: Colors.black38,),
-                                          ),
-                                        )
-                                    )
-
-                                  ],
-                                ),
-
-                              ),
-                            ),
-                            SizedBox(height: 10),
-
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(item['nome']==null?"null":item['nome'],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  alignment: Alignment.centerLeft,
-                                  child: Text((item['descrizione']==null?"Descrizione non disponibile":(item['descrizione'].length < 300?item['descrizione']:item['descrizione'].substring(0, 300)))
-                                    ,textAlign: TextAlign.left,
-                                  ),
-                            )
-                          ],
-                        )
-
-                    ),
-                ),
-            )).toList();
       }
-    else if (list == sponsorMEDIUM)
-      {
-        imageSliders = list.map((item) => Container(
-            child: Card(
+    else {
+      if (list == sponsorTOP) {
+        imageSliders = list.map((item) =>
+            Container(
+
+              child:
+              Card(
+                color: Color.fromARGB(255, 244, 156, 49),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)
                 ),
-                child:InkWell(
-                  onTap: ()async{
-                    var url = item['link'];
-                    if (await canLaunch(url))
-                      await launch(url);
-                    else
-                      // can't launch url, there is some error
-                      throw "Could not launch $url";
-                  },
-                  splashColor: Color.fromARGB(255, 244, 156, 49),
-                  child: Container(
-                    margin: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        child: Stack(
-                          children: <Widget>[
-                            Image.network(item['immagine'], fit: BoxFit.cover, width: 500),
-                            Positioned(
-                              bottom: 0.0,
-                              left: 0.0,
-                              right: 0.0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 244, 156, 49),
+                child: InkWell(
+                    onTap: () async {
+                      var url = item['link'];
+                      if (await canLaunch(url))
+                        await launch(url);
+                      else
+                        // can't launch url, there is some error
+                        throw "Could not launch $url";
+                    },
+                    splashColor: Color.fromARGB(255, 244, 156, 49),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [BoxShadow(color: Colors.black12,
+                                blurRadius: 5,
+                                offset: Offset(0, 10))
+                            ],
+                          ),
+                          margin: EdgeInsets.all(5.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                10.0)),
+                            child:
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                  color: Colors.white,
+                                  child: Image.network(
+                                    item['immagine'], fit: BoxFit.cover,
+                                    width: 1000,),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                                child: Text(item['nome']==null?"null":item['nome'],
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
+
+                                Align(
+                                    alignment: Alignment.topRight,
+                                    child: Container(
+                                      height: 50,
+                                      padding: EdgeInsets.fromLTRB(
+                                          0, 10, 0, 0),
+                                      child: FloatingActionButton(
+
+                                        onPressed: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PartnerDetail(
+                                                          item['nome'],
+                                                          item['descrizione'],
+                                                          LatLng(double.parse(
+                                                              item['lat']),
+                                                              double.parse(
+                                                                  item['lng'])),
+                                                          item['immagine'])));
+                                        },
+
+                                        backgroundColor: Colors.orangeAccent,
+                                        child: Icon(Icons.more_horiz,
+                                          color: Colors.black38,),
+                                      ),
+                                    )
+                                )
+
+                              ],
+                            ),
+
+                          ),
+                        ),
+                        SizedBox(height: 10),
+
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            item['nome'] == null ? "null" : item['nome'],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Text((item['descrizione'] == null
+                              ? "Descrizione non disponibile"
+                              : (item['descrizione'].length < 300
+                              ? item['descrizione']
+                              : item['descrizione'].substring(0, 300)))
+                            , textAlign: TextAlign.left,
+                          ),
+                        )
+                      ],
+                    )
+
+                ),
+              ),
+            )).toList();
+      }
+      else if (list == sponsorMEDIUM) {
+        imageSliders = list.map((item) =>
+            Container(
+                child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: InkWell(
+                      onTap: () async {
+                        var url = item['link'];
+                        if (await canLaunch(url))
+                          await launch(url);
+                        else
+                          // can't launch url, there is some error
+                          throw "Could not launch $url";
+                      },
+                      splashColor: Color.fromARGB(255, 244, 156, 49),
+                      child: Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(10.0)),
+                            child: Stack(
+                              children: <Widget>[
+                                Image.network(item['immagine'],
+                                    fit: BoxFit.cover, width: 500),
+                                Positioned(
+                                  bottom: 0.0,
+                                  left: 0.0,
+                                  right: 0.0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 244, 156, 49),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 20.0),
+                                    child: Text(item['nome'] == null
+                                        ? "null"
+                                        : item['nome'],
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        )
-                    ),
-                  ),
-                )
-            ))).toList();
+                              ],
+                            )
+                        ),
+                      ),
+                    )
+                ))).toList();
       }
-    else if(list == sponsorDOWN)
-      {
-        imageSliders = list.map((item) => Container(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-              ),
-                child:InkWell(
-                  onTap: ()async{
-                    var url = item['link'];
-                    if (await canLaunch(url))
-                      await launch(url);
-                    else
-                      // can't launch url, there is some error
-                      throw "Could not launch $url";
-                  },
-                  splashColor: Color.fromARGB(255, 244, 156, 49),
-                  child: Container(
+      else if (list == sponsorDOWN) {
+        imageSliders = list.map((item) =>
+            Container(
+                child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: InkWell(
+                      onTap: () async {
+                        var url = item['link'];
+                        if (await canLaunch(url))
+                          await launch(url);
+                        else
+                          // can't launch url, there is some error
+                          throw "Could not launch $url";
+                      },
+                      splashColor: Color.fromARGB(255, 244, 156, 49),
+                      child: Container(
                         child: Stack(
                           children: <Widget>[
                             Center(
-                              child: Image.network(item['immagine'], fit: BoxFit.cover, width: 300),
+                              child: Image.network(
+                                  item['immagine'], fit: BoxFit.cover,
+                                  width: 300),
                             )
                           ],
 
-                    ),
-                  ),
-                )
-            ))).toList();
+                        ),
+                      ),
+                    )
+                ))).toList();
       }
+    }
 
     
     return imageSliders;

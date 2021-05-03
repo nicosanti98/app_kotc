@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            ConstrainedBox(constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width/5),
+                            ConstrainedBox(constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width/2.5),
                             child: Opacity(
                                 child: Image(image: AssetImage("res/logoBN.png"), ),
                               opacity: 0.5,
@@ -159,18 +159,6 @@ class HomePage extends StatelessWidget
         ),
       );
 
-
-  }
-  Widget countownEnd(BuildContext context)
-  {
-    return GridView.count(
-      padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height/8, 20, 0),
-      children: [
-        Container(color: Colors.black54,),
-        Container(color: Colors.black54)
-      ],
-
-    );
 
   }
   //Widget da ritornare alla fine del countdown
@@ -517,7 +505,7 @@ class OpenPainter extends CustomPainter{
       ..color = Color.fromARGB(255, 244, 156, 49)
       ..style = PaintingStyle.fill;
     //a rectangle
-    canvas.drawRect(Offset(-100,-100) & Size(MediaQuery.of(context).size.width*2, MediaQuery.of(context).size.height/2), paint1);
+    canvas.drawRect(Offset(-100,-100) & Size(MediaQuery.of(context).size.width*2, MediaQuery.of(context).size.height/1.5), paint1);
   }
 
   @override

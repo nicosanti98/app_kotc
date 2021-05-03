@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app_kotc/NewsDetail.dart';
 import 'package:app_kotc/NonDisponibile.dart';
@@ -53,13 +54,12 @@ class NewsState extends State<News>{
                 child: Scaffold(
                   backgroundColor: Colors.white,
 
-                  body: Column(
+                  body: ListView(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
-                        child: Row(
+                        Row(
                           children: [
                             Container(
+                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                               alignment: Alignment.topLeft,
                               child:FlatButton(
                                 minWidth: 10,
@@ -67,16 +67,72 @@ class NewsState extends State<News>{
                                   child: Icon(Icons.arrow_back)),
 
                             ),
-                            Text("News", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Text("News", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                            ),
                           ],
                         ),
-                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Divider(
                             color: Color.fromARGB(255, 244, 156, 49)
                         ),
                       ),
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView.builder(
+                            itemCount: len,
+                            padding: EdgeInsets.all(20),
+                          itemBuilder: (BuildContext context, int index){
+                              return InkWell(onTap: (){
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NewsDetail(jsondata.elementAt(index)["post_title"].toString(), jsondata.elementAt(index)["post_content"].toString())));
+                              },
+                                focusColor: Colors.orange,
+                                splashColor: Colors.orange,
+
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                  alignment: Alignment.centerLeft,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width:MediaQuery.of(context).size.width-80,
+                                              alignment: Alignment.centerLeft,
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child:Text(jsondata.elementAt(index)['post_title'], textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold),) ,
+                                                  ),
+                                                  Html(data:(jsondata.elementAt(index)['post_content'].toString().length<200)?jsondata.elementAt(index)['post_content'].toString():
+                                                  jsondata.elementAt(index)['post_content'].toString().substring(0,200)),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Icon(Platform.isAndroid?Icons.arrow_forward:Icons.arrow_forward_ios),
+                                            )
+
+
+                                          ],
+                                        ),
+                                        Divider(
+                                            color:  Color.fromARGB(255, 244, 156, 49),
+                                          ),
+                                      ],
+                                    )
+
+                                ),
+                              );
+                          },
+                        )
+                        ),
                       Container(
                         height: MediaQuery.of(context).size.height-100,
                         child:  ListView.builder(

@@ -20,21 +20,29 @@ class NewsDetail extends StatelessWidget{
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(this.title),
-        backgroundColor: Color.fromARGB(255, 244, 156, 49),
-        leading: FlatButton(
-          child: Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-        ),
+
+      body: ListView(
+        children:[
+      Padding(
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+      child: Row(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child:FlatButton(
+                minWidth: 10,
+                onPressed:(){Navigator.of(context).pop();},
+                child: Icon(Icons.arrow_back)),
+
+          ),
+          Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
+    ),Padding(
           padding: EdgeInsets.all(20),
           child: Html(data: this.html),
         ),
+    ]
       )
     );
 
