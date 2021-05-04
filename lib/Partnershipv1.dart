@@ -152,10 +152,10 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                   },
                   child: Icon(Icons.article_outlined, color: Colors.white,),
                 ),
-                body: ListView(
+                body: Column(
                     children:[
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                         child: Row(
                           children: [
                             Container(
@@ -167,86 +167,98 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
 
                             ),
                             Text("Partnership", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+
                           ],
                         ),
                       ),
-
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Divider(
-                          color: Color.fromARGB(255, 244, 156, 49)
-                        ),
-                      ),
-
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                          "KING",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
-
+                            color: Color.fromARGB(255, 244, 156, 49)
                         ),
                       ),
                       Container(
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              aspectRatio: 1/1,
-                              height: sponsorTOP.length==0?10:null,
-                              enlargeCenterPage: false,
-                              viewportFraction: 0.7,
-                              enableInfiniteScroll: false,
-                              autoPlayInterval: Duration(seconds: 7),
-                              autoPlayAnimationDuration: Duration(seconds: 3),
-                              initialPage: 0,
-                              autoPlay: true,
-                            ),
-                            items: returnImgs(sponsorTOP),
-                          )
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                          "BASE",
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
+                        height: MediaQuery.of(context).size.height-114,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView(
+                          children: [
 
-                        ),
-                      ),
-                      Container(
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              enlargeCenterPage: true,
-                              viewportFraction: 0.5,
-                              autoPlayAnimationDuration: Duration(seconds: 2, milliseconds: 500),
-                              enableInfiniteScroll: false,
-                              height: sponsorMEDIUM.length==0?10:null,
-                              initialPage: 0,
-                              autoPlay: true,
-                            ),
-                            items: returnImgs(sponsorMEDIUM),
-                          )
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                          "LITE",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
 
-                        ),
-                      ),
-                      Container(
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              height: sponsorDOWN.length==0?10:100,
-                              enlargeCenterPage: false,
-                              viewportFraction: 0.3,
-                              enableInfiniteScroll: true,
-                              autoPlayAnimationDuration: Duration(milliseconds: 500),
-                              autoPlayInterval: Duration(seconds: 2),
-                              initialPage: 0,
-                              autoPlay: true,
+
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                "KING",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
+
+                              ),
                             ),
-                            items: returnImgs(sponsorDOWN),
-                          )
-                      ),
+                            Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    aspectRatio: 1/1,
+                                    height: sponsorTOP.length==0?10:null,
+                                    enlargeCenterPage: false,
+                                    viewportFraction: 0.7,
+                                    enableInfiniteScroll: false,
+                                    autoPlayInterval: Duration(seconds: 7),
+                                    autoPlayAnimationDuration: Duration(seconds: 3),
+                                    initialPage: 0,
+                                    autoPlay: true,
+                                  ),
+                                  items: returnImgs(sponsorTOP),
+                                )
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                "BASE",
+                                style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
+
+                              ),
+                            ),
+                            Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    enlargeCenterPage: true,
+                                    viewportFraction: 0.5,
+                                    autoPlayAnimationDuration: Duration(seconds: 2, milliseconds: 500),
+                                    enableInfiniteScroll: false,
+                                    height: sponsorMEDIUM.length==0?10:null,
+                                    initialPage: 0,
+                                    autoPlay: true,
+                                  ),
+                                  items: returnImgs(sponsorMEDIUM),
+                                )
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                "LITE",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, letterSpacing: 1), textAlign: TextAlign.center,
+
+                              ),
+                            ),
+                            Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: sponsorDOWN.length==0?10:100,
+                                    enlargeCenterPage: false,
+                                    viewportFraction: 0.3,
+                                    enableInfiniteScroll: true,
+                                    autoPlayAnimationDuration: Duration(milliseconds: 500),
+                                    autoPlayInterval: Duration(seconds: 2),
+                                    initialPage: 0,
+                                    autoPlay: true,
+                                  ),
+                                  items: returnImgs(sponsorDOWN),
+                                )
+                            ),
+                          ],
+                        ),
+                      )
+
+
                     ]
                 ),
               ));

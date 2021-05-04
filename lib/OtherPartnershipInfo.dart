@@ -51,8 +51,8 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        body: SingleChildScrollView(
-          child: Container(
+        body: Column(
+          children:[ Container(
             child: Column(
               children: [
                 Padding(
@@ -97,6 +97,7 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
               ],
             ),
           ),
+    ]
         )
     );
   }

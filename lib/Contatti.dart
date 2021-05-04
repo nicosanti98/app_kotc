@@ -145,12 +145,11 @@ class ContactsState extends State<Contacts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ListView(
+      body:Column(
             children: [
 
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Row(
                   children: [
                     Container(
@@ -172,267 +171,274 @@ class ContactsState extends State<Contacts> {
                   color:  Color.fromARGB(255, 244, 156, 49),
                 ),
               ),
-
               Container(
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child:Container(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Container(
-                                  height: (MediaQuery.of(context).size.width-50)/2,
-                                  width: (MediaQuery.of(context).size.width-50)/2,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height-114,
+                child: ListView(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child:Container(
+                        child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: (MediaQuery.of(context).size.width-50)/2,
+                                        width: (MediaQuery.of(context).size.width-50)/2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                        ),
+                                        child:
+                                        TextButton(
+                                          child:Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Image(image: AssetImage('res/fb.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                                  ),
+
+                                                  SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                                  Row(
+                                                    children: [
+                                                      Align(
+                                                          alignment: Alignment.bottomLeft,
+                                                          child: Text("Facebook", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                            textAlign: TextAlign.left,)
+                                                      ),
+                                                      Container(
+                                                        child: Icon(Icons.arrow_forward, color: Colors.blue,),
+                                                      )
+
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                          ),
+
+                                          onPressed: ()async{
+                                            const url = "https://www.facebook.com/kingofthecagesenigallia";
+                                            if (await canLaunch(url))
+                                              await launch(url);
+                                            else
+                                              // can't launch url, there is some error
+                                              throw "Could not launch $url";
+                                          },
+                                        ),),
+
+                                    ],
                                   ),
-                                  child:
-                                  TextButton(
-                                    child:Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Image(image: AssetImage('res/fb.png'), width: (MediaQuery.of(context).size.width-50)/5),
-                                            ),
+                                  SizedBox(width: 10,),
+                                  Column(
+                                    children: [
 
-                                            SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
-                                            Row(
-                                              children: [
-                                                Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text("Facebook", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                      textAlign: TextAlign.left,)
-                                                ),
-                                                Container(
-                                                  child: Icon(Icons.arrow_forward, color: Colors.blue,),
-                                                )
+                                      Container(
+                                        height: (MediaQuery.of(context).size.width-50)/2,
+                                        width: (MediaQuery.of(context).size.width-50)/2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                        ),
+                                        child:
+                                        TextButton(
+                                          child:Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Image(image: AssetImage('res/insta.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                                  ),
 
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                    ),
+                                                  SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                                  Row(
+                                                    children: [
+                                                      Align(
+                                                          alignment: Alignment.bottomLeft,
+                                                          child: Text("Instagram", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                            textAlign: TextAlign.left,)
+                                                      ),
+                                                      Container(
+                                                        child: Icon(Icons.arrow_forward, color: Colors.purpleAccent),
+                                                      )
 
-                                    onPressed: ()async{
-                                      const url = "https://www.facebook.com/kingofthecagesenigallia";
-                                      if (await canLaunch(url))
-                                        await launch(url);
-                                      else
-                                        // can't launch url, there is some error
-                                        throw "Could not launch $url";
-                                    },
-                                  ),),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                          ),
 
-                              ],
-                            ),
-                            SizedBox(width: 10,),
-                            Column(
-                              children: [
+                                          onPressed: ()async{
+                                            const url = "https://www.instagram.com/kingofthecageofficial/";
+                                            if (await canLaunch(url))
+                                              await launch(url);
+                                            else
+                                              // can't launch url, there is some error
+                                              throw "Could not launch $url";
+                                          },
+                                        ),),
 
-                                Container(
-                                  height: (MediaQuery.of(context).size.width-50)/2,
-                                  width: (MediaQuery.of(context).size.width-50)/2,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
+
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: MediaQuery.of(context).size.width/20,),
+                              Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: (MediaQuery.of(context).size.width-50)/2,
+                                        width: (MediaQuery.of(context).size.width-50)/2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                        ),
+                                        child:
+                                        TextButton(
+                                          child:Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Image(image: AssetImage('res/mail.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                                  ),
+
+                                                  SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                                  Row(
+                                                    children: [
+                                                      Align(
+                                                          alignment: Alignment.bottomLeft,
+                                                          child: Text("Mail", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                            textAlign: TextAlign.left,)
+                                                      ),
+                                                      Container(
+                                                        child: Icon(Icons.arrow_forward, color: Colors.green),
+                                                      )
+
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                          ),
+
+                                          onPressed: ()async{
+                                            const url = "mailto:info@kingofthecage.it";
+                                            if (await canLaunch(url))
+                                              await launch(url);
+                                            else
+                                              // can't launch url, there is some error
+                                              throw "Could not launch $url";
+                                          },
+                                        ),),
+
+                                    ],
                                   ),
-                                  child:
-                                  TextButton(
-                                    child:Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Image(image: AssetImage('res/insta.png'), width: (MediaQuery.of(context).size.width-50)/5),
-                                            ),
+                                  SizedBox(width: 10,),
+                                  Column(
+                                    children: [
 
-                                            SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
-                                            Row(
-                                              children: [
-                                                Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text("Instagram", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                      textAlign: TextAlign.left,)
-                                                ),
-                                                Container(
-                                                  child: Icon(Icons.arrow_forward, color: Colors.purpleAccent),
-                                                )
+                                      Container(
+                                        height: (MediaQuery.of(context).size.width-50)/2,
+                                        width: (MediaQuery.of(context).size.width-50)/2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                        ),
+                                        child:
+                                        TextButton(
+                                          child:Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Image(image: AssetImage('res/web.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                                  ),
 
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                    ),
+                                                  SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                                  Row(
+                                                    children: [
+                                                      Align(
+                                                          alignment: Alignment.bottomLeft,
+                                                          child: Text("Sito", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                            textAlign: TextAlign.left,)
+                                                      ),
+                                                      Container(
+                                                        child: Icon(Icons.arrow_forward, color: Colors.yellow.shade700),
+                                                      )
 
-                                    onPressed: ()async{
-                                      const url = "https://www.instagram.com/kingofthecageofficial/";
-                                      if (await canLaunch(url))
-                                        await launch(url);
-                                      else
-                                        // can't launch url, there is some error
-                                        throw "Could not launch $url";
-                                    },
-                                  ),),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                          ),
 
-
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(height: MediaQuery.of(context).size.width/20,),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Container(
-                                  height: (MediaQuery.of(context).size.width-50)/2,
-                                  width: (MediaQuery.of(context).size.width-50)/2,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                  ),
-                                  child:
-                                  TextButton(
-                                    child:Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Image(image: AssetImage('res/mail.png'), width: (MediaQuery.of(context).size.width-50)/5),
-                                            ),
-
-                                            SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
-                                            Row(
-                                              children: [
-                                                Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text("Mail", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                      textAlign: TextAlign.left,)
-                                                ),
-                                                Container(
-                                                  child: Icon(Icons.arrow_forward, color: Colors.green),
-                                                )
-
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                    ),
-
-                                    onPressed: ()async{
-                                      const url = "mailto:info@kingofthecage.it";
-                                      if (await canLaunch(url))
-                                        await launch(url);
-                                      else
-                                        // can't launch url, there is some error
-                                        throw "Could not launch $url";
-                                    },
-                                  ),),
-
-                              ],
-                            ),
-                            SizedBox(width: 10,),
-                            Column(
-                              children: [
-
-                                Container(
-                                  height: (MediaQuery.of(context).size.width-50)/2,
-                                  width: (MediaQuery.of(context).size.width-50)/2,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                  ),
-                                  child:
-                                  TextButton(
-                                    child:Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Image(image: AssetImage('res/web.png'), width: (MediaQuery.of(context).size.width-50)/5),
-                                            ),
-
-                                            SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
-                                            Row(
-                                              children: [
-                                                Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text("Sito", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                      textAlign: TextAlign.left,)
-                                                ),
-                                                Container(
-                                                  child: Icon(Icons.arrow_forward, color: Colors.yellow.shade700),
-                                                )
-
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                    ),
-
-                                    onPressed: ()async{
-                                      const url = "https://www.kingofthecage.it";
-                                      if (await canLaunch(url))
-                                        await launch(url);
-                                      else
-                                        // can't launch url, there is some error
-                                        throw "Could not launch $url";
-                                    },
-                                  ),),
+                                          onPressed: ()async{
+                                            const url = "https://www.kingofthecage.it";
+                                            if (await canLaunch(url))
+                                              await launch(url);
+                                            else
+                                              // can't launch url, there is some error
+                                              throw "Could not launch $url";
+                                          },
+                                        ),),
 
 
-                              ],
-                            )
-                          ],
-                        ),
-              SizedBox(height: 20,),
+                                    ],
+                                  )
+                                ],
+                              ),
 
-            ]),
-      ),
+                            ]),
+                      ),
 
-              ),
-              Container(
-
-                  alignment: Alignment.bottomCenter,
-                  height: MediaQuery.of(context).size.height/2.5,
-                  child: Container(
-
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: GoogleMap(
-
-
-                        markers: {
-                          Marker(
-                              markerId: MarkerId("KOTC"),
-                              position: pos,
-                              infoWindow: InfoWindow(
-                                  title: "King of the Cage",
-                                  snippet: "Piazza del Duca, Senigallia (AN)"
-                              )
-                          )
-                        },
-                        onMapCreated: _onMapCreated,
-                        initialCameraPosition: CameraPosition(
-                            target: pos,
-                            zoom: 13
-                        )
                     ),
-                  )
-              ),
+                    SizedBox(height: 20),
+                    Container(
+
+                        alignment: Alignment.bottomCenter,
+                        height: MediaQuery.of(context).size.height/2.5,
+                        child: Container(
+
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                          child: GoogleMap(
+
+
+                              markers: {
+                                Marker(
+                                    markerId: MarkerId("KOTC"),
+                                    position: pos,
+                                    infoWindow: InfoWindow(
+                                        title: "King of the Cage",
+                                        snippet: "Piazza del Duca, Senigallia (AN)"
+                                    )
+                                )
+                              },
+                              onMapCreated: _onMapCreated,
+                              initialCameraPosition: CameraPosition(
+                                  target: pos,
+                                  zoom: 13
+                              )
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              )
+
   ])
-    )
     );
 
   }

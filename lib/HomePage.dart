@@ -18,7 +18,7 @@ import 'Shop.dart';
 
 class HomePage extends StatelessWidget
 {
-  var endTime = DateTime.utc(2021, 7, 11,16 ,00).millisecondsSinceEpoch;
+  var endTime = DateTime.utc(2021, 5, 4,15,21).millisecondsSinceEpoch;
 
   getHomePage()
   {
@@ -29,7 +29,10 @@ class HomePage extends StatelessWidget
   Widget build(BuildContext context) {
       return Scaffold(
         backgroundColor: Colors.white,
-        body: Container(
+        body: CustomPaint(
+          painter: OpenPainter(context),
+          willChange: false,
+           child: Container(
 
           child: ListView(
             children: <Widget>[
@@ -40,12 +43,21 @@ class HomePage extends StatelessWidget
                   willChange: false,
                   child: CountdownTimer(endTime: endTime,
                     onEnd: (){
-                      return countDownEnd(context);
+                      return null;
                     },
                     widgetBuilder: (_, CurrentRemainingTime time) {
                       if(time == null)
                       {
-                        return countDownEnd(context);
+                        return ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width/2.5),
+                          child: Opacity(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/2.5,
+                              child: Image(image: AssetImage("res/logoBN.png")),
+                            ) ,
+                            opacity: 0.5,
+
+                          ),
+                        );
                       }
                       else
                       {
@@ -109,7 +121,7 @@ class HomePage extends StatelessWidget
                 ),
               ) ,
               countDownEnd(context),
-              SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+              SizedBox(height:(MediaQuery.of(context).size.width-50)/3),
               Container(
                   height: MediaQuery.of(context).size.height/10,
                   width: MediaQuery.of(context).size.width,
@@ -157,6 +169,7 @@ class HomePage extends StatelessWidget
             ],
           ),
         ),
+        )
       );
 
 
@@ -165,7 +178,7 @@ class HomePage extends StatelessWidget
   Widget countDownEnd(BuildContext context)
   {
     return Container(
-        padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height/8, 20, 0),
+        padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
       child:Container(
         child: Column(
           children: [
@@ -487,7 +500,7 @@ class HomePage extends StatelessWidget
 
           ],
         ),
-      )
+      ),
     );
   }
 
