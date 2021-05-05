@@ -21,26 +21,36 @@ class NewsDetail extends StatelessWidget{
     return Scaffold(
       backgroundColor: Colors.white,
 
-      body: ListView(
+      body: Column(
         children:[
-      Padding(
-      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-      child: Row(
-        children: [
-          Container(
-            alignment: Alignment.topLeft,
-            child:FlatButton(
-                minWidth: 10,
-                onPressed:(){Navigator.of(context).pop();},
-                child: Icon(Icons.arrow_back)),
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                alignment: Alignment.topLeft,
+                child:FlatButton(
+                    minWidth: 10,
+                    onPressed:(){Navigator.of(context).pop();},
+                    child: Icon(Icons.arrow_back)),
 
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                child: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+              ),
+            ],
           ),
-          Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
-        ],
-      ),
-    ),Padding(
+
+    Padding(
           padding: EdgeInsets.all(20),
-          child: Html(data: this.html),
+          child: Container(
+            height: MediaQuery.of(context).size.height-138,
+            child:ListView(
+    children:[
+      Html(data: this.html),
+    ]
+    )
+          )
         ),
     ]
       )

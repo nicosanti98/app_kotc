@@ -18,7 +18,7 @@ import 'Shop.dart';
 
 class HomePage extends StatelessWidget
 {
-  var endTime = DateTime.utc(2021, 5, 4,15,21).millisecondsSinceEpoch;
+  var endTime = DateTime.utc(2021, 7, 15,16,00).millisecondsSinceEpoch;
 
   getHomePage()
   {
