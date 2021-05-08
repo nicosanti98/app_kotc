@@ -400,13 +400,9 @@ class HomePage extends StatelessWidget
               children: [
                 Column(
                   children: [
-                    ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: (MediaQuery.of(context).size.width-50)/2,
-                          minWidth: (MediaQuery.of(context).size.width-50)/2
-                        ),
-                      child:
                     Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
                         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
@@ -428,11 +424,8 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Container(
-                                            width: (MediaQuery.of(context).size.width-170)/2,
-                                          child: AutoSizeText("Calendario", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                            textAlign: TextAlign.left,),
-                                     )
+                                        child: AutoSizeText("Calendario", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.red),
@@ -444,35 +437,29 @@ class HomePage extends StatelessWidget
                             )
                         ),
 
-                        onPressed: (){
+                        onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
                                   builder: (context) => NonDisponibile()));
                         },
                       ),),
-
-                    )
                   ],
                 ),
                 SizedBox(width: 10,),
                 Column(
                   children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minWidth:(MediaQuery.of(context).size.width-50)/2,
-                        minHeight: (MediaQuery.of(context).size.width-50)/2,
-                      ),
-                      child: Container(
-                          decoration: BoxDecoration(
-                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          ),
 
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
                       child:
                       TextButton(
-                        child:
-                        Padding(
+                        child:Padding(
                             padding: EdgeInsets.all(10),
                             child: Column(
                               children: [
@@ -486,15 +473,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                          child: Container(
-                                            width: (MediaQuery.of(context).size.width-170)/2,
-                                            child: AutoSizeText("Classifiche", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                              textAlign: TextAlign.left,),
-
-                                       )
+                                        child: AutoSizeText("Classifiche", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
                                     ),
                                     Container(
-                                      child: Icon(Icons.arrow_forward, color: Colors.green,),
+                                      child: Icon(Icons.arrow_forward, color: Colors.green),
                                     )
 
                                   ],
@@ -503,13 +486,12 @@ class HomePage extends StatelessWidget
                             )
                         ),
 
-                        onPressed: (){
+                        onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
                                   builder: (context) => NonDisponibile()));
                         },
                       ),),
-                    )
 
                   ],
                 )
