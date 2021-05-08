@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +161,11 @@ class ContactsState extends State<Contacts> {
                           child: Icon(Icons.arrow_back)),
 
                     ),
-                    Text("Contattaci", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                    Container(
+                        width: MediaQuery.of(context).size.width-70,
+                        child:  AutoSizeText("Contattaci", maxLines:1,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                      ),
+
                   ],
                 ),
               ),
@@ -209,8 +214,11 @@ class ContactsState extends State<Contacts> {
                                                     children: [
                                                       Align(
                                                           alignment: Alignment.bottomLeft,
-                                                          child: Text("Facebook", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                            textAlign: TextAlign.left,)
+                                                          child: Container(
+                                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                                            child: AutoSizeText("Facebook", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                              textAlign: TextAlign.left,),
+                                                          ),
                                                       ),
                                                       Container(
                                                         child: Icon(Icons.arrow_forward, color: Colors.blue,),
@@ -262,8 +270,11 @@ class ContactsState extends State<Contacts> {
                                                     children: [
                                                       Align(
                                                           alignment: Alignment.bottomLeft,
-                                                          child: Text("Instagram", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                            textAlign: TextAlign.left,)
+                                                          child: Container(
+                                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                                            child: AutoSizeText("Instagram", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                              textAlign: TextAlign.left,),
+                                                          )
                                                       ),
                                                       Container(
                                                         child: Icon(Icons.arrow_forward, color: Colors.purpleAccent),
@@ -319,8 +330,11 @@ class ContactsState extends State<Contacts> {
                                                     children: [
                                                       Align(
                                                           alignment: Alignment.bottomLeft,
-                                                          child: Text("Mail", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                            textAlign: TextAlign.left,)
+                                                          child: Container(
+                                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                                            child: AutoSizeText("Mail", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                              textAlign: TextAlign.left,),
+                                                          )
                                                       ),
                                                       Container(
                                                         child: Icon(Icons.arrow_forward, color: Colors.green),
@@ -372,8 +386,11 @@ class ContactsState extends State<Contacts> {
                                                     children: [
                                                       Align(
                                                           alignment: Alignment.bottomLeft,
-                                                          child: Text("Sito", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                                            textAlign: TextAlign.left,)
+                                                          child: Container(
+                                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                                            child: AutoSizeText("Sito", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                                              textAlign: TextAlign.left,),
+                                                          )
                                                       ),
                                                       Container(
                                                         child: Icon(Icons.arrow_forward, color: Colors.yellow.shade700),

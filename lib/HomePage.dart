@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:app_kotc/Contatti.dart';
 import 'package:app_kotc/NonDisponibile.dart';
 import 'package:app_kotc/Partnershipv1.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -19,7 +20,7 @@ import 'Shop.dart';
 class HomePage extends StatelessWidget
 {
   var endTime = DateTime.utc(2021, 7, 15,16,00).millisecondsSinceEpoch;
-
+  double multiplier = 25;
   getHomePage()
   {
     return this;
@@ -32,7 +33,8 @@ class HomePage extends StatelessWidget
         body: CustomPaint(
           painter: OpenPainter(context),
           willChange: false,
-           child: Container(
+           child: SafeArea(
+             minimum: EdgeInsets.fromLTRB(0, 20, 0, 0),
 
           child: ListView(
             children: <Widget>[
@@ -174,6 +176,7 @@ class HomePage extends StatelessWidget
 
 
   }
+
   //Widget da ritornare alla fine del countdown
   Widget countDownEnd(BuildContext context)
   {
@@ -210,7 +213,7 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("News", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                        child: AutoSizeText("News",maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                           textAlign: TextAlign.left,)
                                     ),
                                     Container(
@@ -260,7 +263,7 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("Shop", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                        child: AutoSizeText("Shop",maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                           textAlign: TextAlign.left,)
                                     ),
                                     Container(
@@ -317,7 +320,7 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("Sponsor", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                        child: AutoSizeText("Sponsor", maxLines: 1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                           textAlign: TextAlign.left,)
                                     ),
                                     Container(
@@ -367,7 +370,7 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("Contatti", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                        child: AutoSizeText("Contatti", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                           textAlign: TextAlign.left,)
                                     ),
                                     Container(
@@ -397,10 +400,13 @@ class HomePage extends StatelessWidget
               children: [
                 Column(
                   children: [
-
+                    ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: (MediaQuery.of(context).size.width-50)/2,
+                          minWidth: (MediaQuery.of(context).size.width-50)/2
+                        ),
+                      child:
                     Container(
-                      height: (MediaQuery.of(context).size.width-50)/2,
-                      width: (MediaQuery.of(context).size.width-50)/2,
                       decoration: BoxDecoration(
                         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
                         borderRadius: BorderRadius.circular(10),
@@ -422,8 +428,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("Calendario", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                          child: AutoSizeText("Calendario", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                            textAlign: TextAlign.left,),
+                                     )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.red),
@@ -442,20 +451,24 @@ class HomePage extends StatelessWidget
                         },
                       ),),
 
-
+                    )
                   ],
                 ),
                 SizedBox(width: 10,),
                 Column(
                   children: [
-                    Container(
-                      height: (MediaQuery.of(context).size.width-50)/2,
-                      width: (MediaQuery.of(context).size.width-50)/2,
-                      decoration: BoxDecoration(
-                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth:(MediaQuery.of(context).size.width-50)/2,
+                        minHeight: (MediaQuery.of(context).size.width-50)/2,
                       ),
+                      child: Container(
+                          decoration: BoxDecoration(
+                          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          ),
+
                       child:
                       TextButton(
                         child:
@@ -473,8 +486,12 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text("Classifiche", style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                          child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Classifiche", maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,),
+
+                                       )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.green,),
@@ -492,6 +509,7 @@ class HomePage extends StatelessWidget
                                   builder: (context) => NonDisponibile()));
                         },
                       ),),
+                    )
 
                   ],
                 )

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +168,11 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                   child: Icon(Icons.arrow_back)),
 
                             ),
-                            Text("Partnership", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                        Container(
+                                width: MediaQuery.of(context).size.width-70,
+                                child:  AutoSizeText("Partnership", maxLines:1,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                              ),
+
 
                           ],
                         ),
@@ -268,7 +274,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
             return Center(child: Scaffold(
               backgroundColor: Colors.white,
               body: Center(
-                child: CircularProgressIndicator(),
+                child: Platform.isAndroid?CircularProgressIndicator():CupertinoActivityIndicator(),
               ),
             ), );
           }
@@ -311,7 +317,6 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                     },
                     splashColor: Color.fromARGB(255, 244, 156, 49),
                     child: Column(
-                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
                           decoration: BoxDecoration(
@@ -369,32 +374,46 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                           ),
                         ),
                         SizedBox(height: 10),
+                        Builder(
+                          builder: (BuildContext context1){
+                            return Container(
 
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            item['nome'] == null ? "null" : item['nome'],
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          alignment: Alignment.centerLeft,
-                          child: Text((item['descrizione'] == null
-                              ? "Descrizione non disponibile"
-                              : (item['descrizione'].length < 300
-                              ? item['descrizione']
-                              : item['descrizione'].substring(0, 300)))
-                            , textAlign: TextAlign.left,
-                          ),
+                                height: MediaQuery.of(context1).size.height/8,
+                                child: ListView(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        item['nome'] == null ? "null" : item['nome'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    SizedBox(height: 10,),
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text((item['descrizione'] == null
+                                          ? "Descrizione non disponibile"
+                                          : (item['descrizione'].length < 300
+                                          ? item['descrizione']
+                                          : item['descrizione'].substring(0, 300)))
+                                        , textAlign: TextAlign.left,
+                                      ),
+                                    )
+                                  ],
+                                )
+                            );
+                        },
                         )
+
+
+
                       ],
                     )
 

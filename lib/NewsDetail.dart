@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -36,8 +37,12 @@ class NewsDetail extends StatelessWidget{
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                child: Container(
+                  width: MediaQuery.of(context).size.width-70,
+                  child:  AutoSizeText(this.title, maxLines:1,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                ),
               ),
+
             ],
           ),
 

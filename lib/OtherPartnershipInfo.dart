@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
@@ -56,7 +57,7 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                   child: Row(
                     children: [
                       Container(
@@ -67,7 +68,10 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
                             child: Icon(Icons.arrow_back)),
 
                       ),
-                      Text("Brochure Sponsor", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                      Container(
+                        width: MediaQuery.of(context).size.width-150,
+                        child:  AutoSizeText("Brochure Sponsor", maxLines:1,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                      ),
                       Container(
                         alignment: Alignment.topRight,
                         child:
@@ -87,7 +91,7 @@ class OtherPartnershipInfoState extends State<OtherPartnershipInfo> {
                 ),
 
             _isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? Center(child: Platform.isAndroid?CircularProgressIndicator():CupertinoActivityIndicator())
                 : Container(
                     height: MediaQuery.of(context).size.height/1.3,
                     child: PDFViewer(

@@ -1,5 +1,6 @@
 
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -84,7 +85,7 @@ class PartnerDetailState extends State<PartnerDetail> {
                             Container(
                               padding: EdgeInsets.all(10),
                               alignment: Alignment.topLeft,
-                              child: Text(name1,textAlign: TextAlign.left, style: TextStyle(fontSize: 20, letterSpacing: 1.5, fontWeight: FontWeight.bold),),
+                              child: AutoSizeText(name1, maxLines:2,textAlign: TextAlign.left, style: TextStyle(fontSize: 20, letterSpacing: 1.5, fontWeight: FontWeight.bold),),
                             ),
                             Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: Divider(

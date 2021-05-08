@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app_kotc/NewsDetail.dart';
 import 'package:app_kotc/NonDisponibile.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -69,7 +70,10 @@ class NewsState extends State<News>{
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                              child: Text("News", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width-70,
+                                child:  AutoSizeText("News", maxLines:1,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1), textAlign: TextAlign.left,),
+                              ),
                             ),
                           ],
                         ),
@@ -108,7 +112,7 @@ class NewsState extends State<News>{
                                                 children: [
                                                   Container(
                                                     alignment: Alignment.centerLeft,
-                                                    child:Text(jsondata.elementAt(index)['post_title'], textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),) ,
+                                                    child:AutoSizeText(jsondata.elementAt(index)['post_title'], textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),) ,
                                                   ),
                                                   Html(data:(jsondata.elementAt(index)['post_content'].toString().length<200)?jsondata.elementAt(index)['post_content'].toString():
                                                   jsondata.elementAt(index)['post_content'].toString().substring(0,200)),
@@ -145,7 +149,7 @@ class NewsState extends State<News>{
             return Center(child: Scaffold(
               backgroundColor: Colors.white,
               body: Center(
-                child: CircularProgressIndicator(),
+                child: Platform.isAndroid?CircularProgressIndicator():CupertinoActivityIndicator(),
               ),
             ), );
           }
