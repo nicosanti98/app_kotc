@@ -114,7 +114,6 @@ class NewsState extends State<News>{
                                                     alignment: Alignment.centerLeft,
                                                     child:AutoSizeText(jsondata.elementAt(index)['post_title'], textAlign: TextAlign.left, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),) ,
                                                   ),
-                                                  Text(jsondata.elementAt(index)['post_content'], overflow: TextOverflow.ellipsis,),
                                                   Html(data:(jsondata.elementAt(index)['post_content'].toString().length<200)?jsondata.elementAt(index)['post_content'].toString():
                                                   jsondata.elementAt(index)['post_content'].toString().substring(0,200)),
                                                 ],
