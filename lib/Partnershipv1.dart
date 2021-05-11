@@ -307,13 +307,18 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                     borderRadius: BorderRadius.circular(10)
                 ),
                 child: InkWell(
-                    onTap: () async {
-                      var url = item['link'];
-                      if (await canLaunch(url))
-                        await launch(url);
-                      else
-                        // can't launch url, there is some error
-                        throw "Could not launch $url";
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PartnerDetail(
+                                      item['nome'],
+                                      item['descrizione'],
+                                      LatLng(double.parse(
+                                          item['lat']),
+                                          double.parse(
+                                              item['lng'])),
+                                      item['immagine'], item['link'])));
                     },
                     splashColor: Color.fromARGB(255, 244, 156, 49),
                     child: Column(
@@ -358,7 +363,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                                               item['lat']),
                                                               double.parse(
                                                                   item['lng'])),
-                                                          item['immagine'])));
+                                                          item['immagine'], item['link'])));
                                         },
 
                                         backgroundColor: Colors.orangeAccent,

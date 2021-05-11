@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'News.dart';
 
@@ -11,13 +12,15 @@ String name1;
 String description1;
 LatLng position1;
 String image1;
+String url1;
 
 class PartnerDetail extends StatefulWidget{
 
 
 
-  PartnerDetail(String name, String description, LatLng position, String image)
+  PartnerDetail(String name, String description, LatLng position, String image, String url)
   {
+    url1 = url==null?"":url;
     name1 = name==null?"null":name;
     description1 = description==null?"null":description;
     position1 = position;
@@ -66,9 +69,41 @@ class PartnerDetailState extends State<PartnerDetail> {
 
                       width: MediaQuery.of(context).size.width-50,
                       alignment: Alignment.center,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width/2,
-                        child: Image.network(image1),
+                      child: Column(
+                        children:[
+                          Container(
+                            width: MediaQuery.of(context).size.width/2,
+                            child: Image.network(image1),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FlatButton(
+                                child: Text("Sito Web"),
+                                onPressed: ()async {
+                                  var url = url1;
+                                  if (await canLaunch(url))
+                                    await launch(url);
+                                  else
+                                    // can't launch url, there is some error
+                                    throw "Could not launch $url";
+                                },
+                              ),
+                              FlatButton(
+                                child: Text("Indicazioni"),
+                                onPressed: ()async{
+                                  var url = "https://www.google.com/maps/search/?api=1&query="+position1.latitude.toString()+","+position1.longitude.toString();
+
+                                  if (await canLaunch(url))
+                                    await launch(url);
+                                  else
+                                    // can't launch url, there is some error
+                                    throw "Could not launch $url";
+                                },
+                              )
+                            ],
+                          )
+                        ]
                       )
                     ),
                     SizedBox(height: 20),
@@ -154,7 +189,7 @@ class OpenPainter extends CustomPainter{
       ..color = Color.fromARGB(255, 244, 156, 49)
       ..style = PaintingStyle.fill;
     //a rectangle
-    canvas.drawRect(Offset(0, -100) & Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/2), paint1);
+    canvas.drawRect(Offset(0, -100) & Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/1.5), paint1);
   }
 
   @override

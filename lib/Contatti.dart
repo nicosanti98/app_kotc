@@ -182,7 +182,7 @@ class ContactsState extends State<Contacts> {
                 child: ListView(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child:Container(
                         child: Column(
                             children: [
@@ -422,7 +422,21 @@ class ContactsState extends State<Contacts> {
                       ),
 
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 30),
+                    ListTile(
+
+                      leading: Image(image: AssetImage("res/3x3fiba.png"),),
+                      title: Text("Regolamento"),
+                      subtitle: Text("Regolamento ufficiale FIBA 3x3"),
+                      onTap: ()async {const url = "https://www.kingofthecage.it/risorse/pdf/regol_fiba3x3.pdf";
+                      if (await canLaunch(url))
+                        await launch(url);
+                        else
+                        // can't launch url, there is some error
+                        throw "Could not launch $url";},
+
+                    ),
+                    SizedBox(height:20),
                     Container(
 
                         alignment: Alignment.bottomCenter,
@@ -450,10 +464,12 @@ class ContactsState extends State<Contacts> {
                               )
                           ),
                         )
-                    )
+                    ),
+
                   ],
                 ),
-              )
+              ),
+
 
   ])
     );

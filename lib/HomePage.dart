@@ -213,8 +213,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("News",maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("News", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward),
@@ -263,8 +266,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("Shop",maxLines: 1, style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Shop", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.blue),
@@ -320,8 +326,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("Sponsor", maxLines: 1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Sponsor", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.yellow.shade700),
@@ -370,8 +379,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("Contatti", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Contatti", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.purpleAccent),
@@ -424,8 +436,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("Calendario", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Calendario", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.red),
@@ -473,8 +488,11 @@ class HomePage extends StatelessWidget
                                   children: [
                                     Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: AutoSizeText("Classifiche", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
-                                          textAlign: TextAlign.left,)
+                                        child: Container(
+                                          width: (MediaQuery.of(context).size.width-170)/2,
+                                          child: AutoSizeText("Classifiche", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                            textAlign: TextAlign.left,)
+                                        )
                                     ),
                                     Container(
                                       child: Icon(Icons.arrow_forward, color: Colors.green),
