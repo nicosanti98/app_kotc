@@ -14,11 +14,13 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_countdown_timer/index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'Iscrizione.dart';
 import 'News.dart';
 import 'Shop.dart';
 
 class HomePage extends StatelessWidget
 {
+  var dateTimeEnd = DateTime.utc(2021, 7, 15, 16, 00);
   var endTime = DateTime.utc(2021, 7, 15,16,00).millisecondsSinceEpoch;
   double multiplier = 25;
   getHomePage()
@@ -29,6 +31,7 @@ class HomePage extends StatelessWidget
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+
         backgroundColor: Colors.white,
         body: CustomPaint(
           painter: OpenPainter(context),
@@ -50,15 +53,21 @@ class HomePage extends StatelessWidget
                     widgetBuilder: (_, CurrentRemainingTime time) {
                       if(time == null)
                       {
-                        return ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width/2.5),
-                          child: Opacity(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width/2.5,
-                              child: Image(image: AssetImage("res/logoBN.png")),
-                            ) ,
-                            opacity: 0.5,
+                        return Column(
+                          children: [
+                            ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width/2.5),
+                              child: Opacity(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/2.5,
+                                  child: Image(image: AssetImage("res/logoBN.png")),
+                                ) ,
+                                opacity: 0.5,
 
-                          ),
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            dateTimeEnd.difference(DateTime.now()).inDays < 7?subscriptionsEnd(context):countDownEnd(context),
+                          ],
                         );
                       }
                       else
@@ -113,6 +122,8 @@ class HomePage extends StatelessWidget
 
                               ),
                             ),
+                            SizedBox(height: 20,),
+                            dateTimeEnd.difference(DateTime.now()).inDays < 7?subscriptionsEnd(context):countDownEnd(context),
 
 
                           ],
@@ -122,7 +133,6 @@ class HomePage extends StatelessWidget
                     },),
                 ),
               ) ,
-              countDownEnd(context),
               SizedBox(height:(MediaQuery.of(context).size.width-50)/3),
               Container(
                   height: MediaQuery.of(context).size.height/10,
@@ -177,14 +187,410 @@ class HomePage extends StatelessWidget
 
   }
 
+  Widget subscriptionsEnd(BuildContext context)
+  {
+    return Container(
+      child:Container(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/news.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("News", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward),
+                                    )
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+
+                        onPressed: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => News()));
+                        },
+                      ),),
+
+                  ],
+                ),
+                SizedBox(width: 10,),
+                Column(
+                  children: [
+
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/shop.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Shop", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.blue),
+                                    )
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+
+                        onPressed: ()async{
+                          const url = "https://www.kingofthecage.it/store";
+                          if (await canLaunch(url))
+                            await launch(url);
+                          else
+                            // can't launch url, there is some error
+                            throw "Could not launch $url";
+                        },
+                      ),),
+
+
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).size.width/20,),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/partner.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Sponsor", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.yellow.shade700),
+                                    )
+
+                                  ],
+                                ),
+                              ],
+                            )
+                        ),
+
+                        onPressed: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProvaPartnership()));
+                        },
+                      ),),
+
+                  ],
+                ),
+                SizedBox(width: 10,),
+                Column(
+                  children: [
+
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/contatti.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Contatti", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.purpleAccent),
+                                    )
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+
+                        onPressed: ()async{
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => Contacts()));
+                        },
+                      ),),
+
+
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).size.width/20,),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/calendario.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Calendario", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.red),
+                                    )
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+
+                        onPressed: ()async{
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => NonDisponibile()));
+                        },
+                      ),),
+                  ],
+                ),
+                SizedBox(width: 10,),
+                Column(
+                  children: [
+
+                    Container(
+                      height: (MediaQuery.of(context).size.width-50)/2,
+                      width: (MediaQuery.of(context).size.width-50)/2,
+                      decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child:
+                      TextButton(
+                        child:Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Image(image: AssetImage('res/podio.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                                ),
+
+                                SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                                Row(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Container(
+                                            width: (MediaQuery.of(context).size.width-170)/2,
+                                            child: AutoSizeText("Classifiche", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                              textAlign: TextAlign.left,)
+                                        )
+                                    ),
+                                    Container(
+                                      child: Icon(Icons.arrow_forward, color: Colors.green),
+                                    )
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+
+                        onPressed: ()async{
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => NonDisponibile()));
+                        },
+                      ),),
+
+                  ],
+                )
+              ],
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+  }
   //Widget da ritornare alla fine del countdown
   Widget countDownEnd(BuildContext context)
   {
     return Container(
-        padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
       child:Container(
         child: Column(
           children: [
+            Row(
+              children:[
+                Container(
+                  height: (MediaQuery.of(context).size.width-50)/2,
+                  width: (MediaQuery.of(context).size.width-40),
+                  decoration: BoxDecoration(
+                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5, offset: Offset(0, 10))],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child:
+                  TextButton(
+                    child:Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              child: Image(image: AssetImage('res/iscr.png'), width: (MediaQuery.of(context).size.width-50)/5),
+                            ),
+
+                            SizedBox(height:(MediaQuery.of(context).size.width-50)/10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                        width: (MediaQuery.of(context).size.width-130),
+                                        child: AutoSizeText("Iscrivi ora la tua suqadra!", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                          textAlign: TextAlign.left,)
+                                    )
+                                ),
+                                Container(
+                                  alignment: Alignment.topRight,
+                                  child: Icon(Icons.arrow_forward, color: Colors.green,),
+                                )
+
+                              ],
+                            )
+                          ],
+                        )
+                    ),
+
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) => Iscrizione()));
+                    },
+                  ),),
+              ]
+            ),
+            SizedBox(height: MediaQuery.of(context).size.width/20,),
             Row(
               children: [
                 Column(
@@ -522,7 +928,6 @@ class HomePage extends StatelessWidget
     );
   }
 
-}
 
 class OpenPainter extends CustomPainter{
   var context;

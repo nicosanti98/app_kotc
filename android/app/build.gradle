@@ -41,8 +41,8 @@ android {
         applicationId "com.kingofthecage.app_kotc"
         minSdkVersion 29
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.1.0"
     }
 
     buildTypes {
