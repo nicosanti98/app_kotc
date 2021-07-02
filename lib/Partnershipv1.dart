@@ -251,7 +251,7 @@ class ProvaPartnershipState extends State<ProvaPartnership>{
                                     height: sponsorDOWN.length==0?10:100,
                                     enlargeCenterPage: false,
                                     viewportFraction: 0.3,
-                                    enableInfiniteScroll: true,
+                                    enableInfiniteScroll: false,
                                     autoPlayAnimationDuration: Duration(milliseconds: 500),
                                     autoPlayInterval: Duration(seconds: 2),
                                     initialPage: 0,

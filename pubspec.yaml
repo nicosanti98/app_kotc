@@ -35,7 +35,8 @@ dependencies:
   share: any
   carousel_slider: ^3.0.0
   auto_size_text: any
-
+  numberpicker: any
+  collection: any
 
 
 

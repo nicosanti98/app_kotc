@@ -3,9 +3,12 @@
 
 import 'dart:ui';
 
+import 'package:app_kotc/Calendario.dart';
+import 'package:app_kotc/Classifiche.dart';
 import 'package:app_kotc/Contatti.dart';
 import 'package:app_kotc/NonDisponibile.dart';
 import 'package:app_kotc/Partnershipv1.dart';
+import 'package:app_kotc/PrenotazioniPosto.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +19,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'Iscrizione.dart';
 import 'News.dart';
+import 'Offerte.dart';
 import 'Shop.dart';
 
+final dateTimeEnd = DateTime.utc(2021, 7, 15, 16, 00);
+final endTime = DateTime.utc(2021, 7, 15,16,00).millisecondsSinceEpoch;
 class HomePage extends StatelessWidget
 {
-  var dateTimeEnd = DateTime.utc(2021, 7, 15, 16, 00);
-  var endTime = DateTime.utc(2021, 7, 15,16,00).millisecondsSinceEpoch;
   double multiplier = 25;
   getHomePage()
   {
@@ -31,7 +35,40 @@ class HomePage extends StatelessWidget
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+        persistentFooterButtons: [
+          Container(
+            width: double.maxFinite,
+            child: FlatButton(
+              color: Colors.transparent,
+              child: Row(
+                children: [
+                  Container(
+                    width: 20,
+                    child: Image(image: AssetImage("res/logoCOLORI.png",)),
+                  ),
+                  SizedBox(width: 30,),
+                  Text("Prenota il tuo posto a sedere!",maxLines: 1,),
+                ],
+              ),
+              onPressed: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => PrenotazioniPosto()));
+              },
+            )
+          )
+        ],
+        floatingActionButton: FloatingActionButton(
 
+          backgroundColor: Colors.red,
+          child: Icon(Icons.local_offer_outlined, color: Colors.white,),
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => Offerte()));
+
+          },
+        ),
         backgroundColor: Colors.white,
         body: CustomPaint(
           painter: OpenPainter(context),
@@ -463,7 +500,7 @@ class HomePage extends StatelessWidget
                         onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context) => NonDisponibile()));
+                                  builder: (context) => Calendario()));
                         },
                       ),),
                   ],
@@ -567,7 +604,7 @@ class HomePage extends StatelessWidget
                                     alignment: Alignment.center,
                                     child: Container(
                                         width: (MediaQuery.of(context).size.width-130),
-                                        child: AutoSizeText("Iscrivi ora la tua suqadra!", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
+                                        child: AutoSizeText("Iscrivi ora la tua squadra!", maxLines:1,style: TextStyle(fontSize: 22, letterSpacing: 1, fontWeight: FontWeight.bold, color: Colors.black),
                                           textAlign: TextAlign.left,)
                                     )
                                 ),
@@ -913,7 +950,7 @@ class HomePage extends StatelessWidget
                         onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context) => NonDisponibile()));
+                                  builder: (context) => Classifiche()));
                         },
                       ),),
 
