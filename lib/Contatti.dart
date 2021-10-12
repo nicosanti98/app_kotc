@@ -32,7 +32,7 @@ class Contacts extends StatefulWidget{
 
 class ContactsState extends State<Contacts> {
   GoogleMapController mapController;
-  final pos = LatLng(43.715146323947984, 13.219670999849454);
+  final pos = LatLng(43.715691, 13.224822);
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }

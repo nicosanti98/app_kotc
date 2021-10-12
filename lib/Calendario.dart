@@ -115,11 +115,11 @@ class CalendarioState extends State<Calendario> {
                                       color: Colors.white,
                                     ),
                                     child:ListTile(
-                                      leading: Text("Gara #"+jsondata.elementAt(i)["idGara"]),
-                                      title: AutoSizeText(jsondata.elementAt(i)['a']+" - "+jsondata.elementAt(i)['b']),
+                                      leading: AutoSizeText(jsondata.elementAt(i)['data'].toString().split(" ")[0]+"\n"+jsondata.elementAt(i)['data'].toString().split(" ")[1], maxLines: 3,),
+                                      title: AutoSizeText(jsondata.elementAt(i)['a']+" - "+jsondata.elementAt(i)['b'], style: TextStyle(fontWeight: FontWeight.bold),),
                                       subtitle: AutoSizeText("Categoria: "+jsondata.elementAt(i)['sesso'].toString().toUpperCase()+"\n"
-                                          +"Girone: "+jsondata.elementAt(i)['girone']+"\n"+
-                                          "Ora: "+jsondata.elementAt(i)['data']),
+                                          +jsondata.elementAt(i)['girone']+"\n"+
+                                          "Gara #"+jsondata.elementAt(i)["idGara"]),
                                       trailing: AutoSizeText(jsondata.elementAt(i)['puntiA']+" - "+jsondata.elementAt(i)['puntiB']),
                                     ),
                                   ),

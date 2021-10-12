@@ -26,6 +26,7 @@ class OfferteState extends State<Offerte>{
   Future<String>getArticles() async {
     Uri uri = Uri.parse("https://www.kingofthecage.it/API/KotcApp/getOffers.php");
     var response = await http.get(uri);
+    print(response.body);
     return (response.body);
   }
   @override

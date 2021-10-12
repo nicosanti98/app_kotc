@@ -552,7 +552,7 @@ class HomePage extends StatelessWidget
                         onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context) => NonDisponibile()));
+                                  builder: (context) => Classifiche()));
                         },
                       ),),
 
@@ -898,7 +898,7 @@ class HomePage extends StatelessWidget
                         onPressed: ()async{
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context) => NonDisponibile()));
+                                  builder: (context) => Calendario()));
                         },
                       ),),
                   ],
